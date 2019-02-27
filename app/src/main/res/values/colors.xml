@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#ffffff</color>
+    <!-- 主体文字,标题/标签 -->
+    <color name="txt_black">#444444</color>
+    <!-- 内容文字,正文 -->
+    <color name="txt_gray">#999999</color>
+    <!--搜索框未输入文字-->
+    <color name="txt_hint">#aaaaaa</color>
+
+    <!--饼状图颜色库-->
+    <color name="ivory">#FFFFF0</color><!--象牙色 -->
+    <color name="navajowhite">#FFDEAD</color><!--纳瓦白 -->
+    <color name="deeppink">#FF1493</color><!--深粉红色 -->
+    <color name="palevioletred">#DB7093</color><!--苍紫罗兰色 -->
+    <color name="indianred">#CD5C5C</color><!--印第安红 -->
+    <color name="silver">#C0C0C0</color><!--银色 -->
+    <color name="darkgoldenrod">#B8860B</color><!--暗金黄色 -->
+    <color name="firebrick">#B22222</color><!--火砖色 -->
+    <color name="powderblue">#B0E0E6</color><!--粉蓝色 -->
+    <color name="greenyellow">#ADFF2F</color><!--黄绿色 -->
+    <color name="mediumpurple">#9370DB</color><!--中紫色 -->
+    <color name="darkseagreen">#8FBC8F</color><!--暗海兰色 -->
+    <color name="blueviolet">#8A2BE2</color><!--紫罗兰蓝色 -->
+    <color name="lightskyblue">#87CEFA</color><!--亮天蓝色 -->
+    <color name="olive">#808000</color><!--橄榄色 -->
+    <color name="mediumaquamarine">#66CDAA</color><!--中绿色 -->
+    <color name="cornflowerblue">#6495ED</color><!--菊兰色 -->
+    <color name="mediumturquoise">#48D1CC</color><!--中绿宝石 -->
+    <color name="mediumseagreen">#3CB371</color><!--中海蓝 -->
+    <color name="cyan">#00FFFF</color><!--青色 -->
+    <color name="lime">#00FF00</color><!--酸橙色 -->
+    <color name="mediumspringgreen">#00FA9A</color><!--中春绿色 -->
+    <color name="deepskyblue">#00BFFF</color><!--深天蓝色 -->
+    <color name="darkgreen">#006400</color><!--暗绿色 -->
+    <color name="navy">#000080</color><!--海军色 -->
+    <color name="weblan">#9DD3CC</color><!--黑色 -->
+</resources>
