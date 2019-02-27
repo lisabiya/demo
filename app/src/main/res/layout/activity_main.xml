@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="@color/cornflowerblue">
 
         <TextView
@@ -22,20 +22,21 @@
 
     </RelativeLayout>
 
-
-    <TextView
-        android:id="@+id/btClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/app_name"
-        android:textColor="@color/txt_black" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
-        android:clickable="false"
+    <com.amap.api.maps.MapView
+        android:id="@+id/mMapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="60dp" />
+
+    <ImageView
+        android:id="@+id/ivLocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:src="@mipmap/ic_location" />
+
 
 </RelativeLayout>
