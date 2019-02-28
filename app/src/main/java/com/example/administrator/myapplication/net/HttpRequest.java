@@ -11,7 +11,6 @@ import io.reactivex.Observable;
 import static com.example.administrator.myapplication.net.RetrofitUtil.getApiService;
 
 /**
- * Created by LiJie on 2017/7/6 18:06.
  */
 
 public class HttpRequest {

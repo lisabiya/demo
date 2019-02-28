@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#007aff</color>
+    <color name="colorPrimaryDark">#007aff</color>
+    <color name="colorAccent">#ff7f00</color>
 
     <color name="white">#ffffff</color>
+
+    <color name="bg_grey">#f4f4f4</color>
+
     <!-- 主体文字,标题/标签 -->
     <color name="txt_black">#444444</color>
     <!-- 内容文字,正文 -->
-    <color name="txt_gray">#999999</color>
+    <color name="txt_gray">#8a8a8a</color>
     <!--搜索框未输入文字-->
     <color name="txt_hint">#aaaaaa</color>
+
 
     <!--饼状图颜色库-->
     <color name="ivory">#FFFFF0</color><!--象牙色 -->

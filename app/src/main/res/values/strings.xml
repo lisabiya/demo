@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">宝瑞电器</string>
     <string name="title">标题</string>
+    <string name="user_center">个人中心</string>
     <string name="cancel">取消</string>
+
+    <string name="get_order">抢单</string>
+    <string name="order">订单</string>
+    <string name="system_information">系统消息</string>
+    <string name="verified">实名认证</string>
+    <string name="my_order">我的订单</string>
+    <string name="my_purse">我的钱包</string>
+    <string name="setting">设置中心</string>
+    <string name="rp_record">奖惩记录</string>
+
 </resources>

@@ -11,7 +11,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
-import com.example.administrator.myapplication.MainActivityIml;
+import com.example.administrator.myapplication.activity.MainActivityIml;
 import com.example.administrator.myapplication.base.BaseApplication;
 
 import androidx.lifecycle.Lifecycle;
@@ -57,6 +57,7 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
         //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
         mMapView.onPause();
     }
+
 
 
     /******************定位*******************/
@@ -139,5 +140,6 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
     public void clear() {
         MapDrawUtil.clearMark();
     }
+
 
 }

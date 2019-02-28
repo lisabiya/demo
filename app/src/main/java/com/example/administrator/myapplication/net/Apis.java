@@ -1,7 +1,6 @@
 package com.example.administrator.myapplication.net;
 
 /**
- * Created by LiJie on 2017/4/6 11:08.
  */
 
 public class Apis {

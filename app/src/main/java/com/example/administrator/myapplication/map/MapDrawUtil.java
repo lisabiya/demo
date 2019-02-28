@@ -8,7 +8,6 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.example.administrator.myapplication.R;
-import com.example.administrator.myapplication.base.BaseApplication;
 
 import java.util.HashMap;
 import java.util.Map;
