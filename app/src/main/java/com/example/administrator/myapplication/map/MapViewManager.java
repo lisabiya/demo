@@ -10,9 +10,7 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.blankj.utilcode.util.LogUtils;
 import com.example.administrator.myapplication.MainActivityIml;
 import com.example.administrator.myapplication.base.BaseApplication;
 
@@ -34,7 +32,7 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private void onDestroy() {
-
+        MapDrawUtil.onDestroy();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -130,11 +128,16 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
         MarkerOptions options = new MarkerOptions();
         mMapView.getMap().addMarker(options);
 
-        Marker marker = mMapView.getMap()
-                .addMarker(new MarkerOptions().position(position)
-//                        .title("默认点标记").snippet("DefaultMarker")
-                );
+//        Marker marker = mMapView.getMap()
+//                .addMarker(new MarkerOptions().position(position)
+////                        .title("默认点标记").snippet("DefaultMarker")
+//                );
+        MapDrawUtil.drawMark(mMapView.getMap(), position);
+    }
 
+    @Override
+    public void clear() {
+        MapDrawUtil.clearMark();
     }
 
 }

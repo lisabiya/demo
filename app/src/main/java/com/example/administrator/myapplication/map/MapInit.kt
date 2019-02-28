@@ -8,6 +8,7 @@ import com.amap.api.maps.model.MyLocationStyle
 fun initMap(map: AMap) {
     map.uiSettings.isRotateGesturesEnabled = false
     map.uiSettings.isZoomControlsEnabled = false
+
     map.uiSettings.isCompassEnabled = false
 }
 

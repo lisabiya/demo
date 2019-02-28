@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         ivLocation.setOnClickListener { mainActivityIml.location() }
-
+        ivClear.setOnClickListener { mainActivityIml.clear() }
     }
 
 

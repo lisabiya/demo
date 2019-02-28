@@ -38,5 +38,14 @@
         android:layout_marginBottom="60dp"
         android:src="@mipmap/ic_location" />
 
+    <ImageView
+        android:id="@+id/ivClear"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/ivLocation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/ic_clear" />
 
 </RelativeLayout>
