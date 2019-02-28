@@ -7,7 +7,11 @@ import com.blankj.utilcode.util.BarUtils
 import com.example.administrator.myapplication.map.MapViewManager
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var manager: MapViewManager
+    private lateinit var mainActivityIml: MainActivityIml
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -25,12 +29,17 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initData() {
-        lifecycle.addObserver(MapViewManager(mMapView))
+        manager = MapViewManager(mMapView)
+        mainActivityIml = manager.inject()
+        lifecycle.addObserver(manager)
     }
 
 
     private fun initView() {
+        ivLocation.setOnClickListener { mainActivityIml.location() }
+
     }
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

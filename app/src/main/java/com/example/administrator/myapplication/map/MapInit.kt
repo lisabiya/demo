@@ -8,9 +8,10 @@ import com.amap.api.maps.model.MyLocationStyle
 fun initMap(map: AMap) {
     map.uiSettings.isRotateGesturesEnabled = false
     map.uiSettings.isZoomControlsEnabled = false
+    map.uiSettings.isCompassEnabled = false
 }
 
-//初始化定位
+//初始化定位(系统自带定位)
 fun initMapLocation(map: AMap) {
     val myLocationStyle = MyLocationStyle()
     myLocationStyle.interval(2000) //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。

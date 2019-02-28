@@ -5,15 +5,22 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.blankj.utilcode.util.LogUtils;
+import com.example.administrator.myapplication.MainActivityIml;
 import com.example.administrator.myapplication.base.BaseApplication;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
-public class MapViewManager implements LifecycleObserver, AMapLocationListener {
+public class MapViewManager implements LifecycleObserver, AMapLocationListener, MainActivityIml {
     private MapView mMapView;
     private AMapLocation aMapLocation;
     //声明AMapLocationClient类对象
@@ -22,7 +29,6 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener {
     public MapViewManager(MapView mMapView) {
         this.mMapView = mMapView;
         MapInitKt.initMap(mMapView.getMap());
-        MapInitKt.initMapLocation(mMapView.getMap());
         initLocation();
     }
 
@@ -33,13 +39,11 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private void onStart() {
-        LogUtils.eTag("location", "onStart");
         if (locationClient != null) locationClient.startLocation();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private void onStop() {
-        LogUtils.eTag("location", "onStop");
         if (locationClient != null) locationClient.stopLocation();
     }
 
@@ -64,7 +68,6 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener {
         //设置定位回调监听
         locationClient.setLocationListener(this);
         initLocationOption();
-        LogUtils.eTag("location", "initLocation");
     }
 
     private void initLocationOption() {
@@ -79,7 +82,7 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener {
         //设置是否返回地址信息（默认返回地址信息）
         mLocationOption.setNeedAddress(true);
         //获取一次定位结果,该方法默认为false。
-//        mLocationOption.setOnceLocation(false);
+        mLocationOption.setOnceLocation(true);
 
         if (null != locationClient) {
             locationClient.setLocationOption(mLocationOption);
@@ -93,10 +96,45 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener {
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         this.aMapLocation = aMapLocation;
-        LogUtils.eTag("location", "onLocationChanged" + aMapLocation.getAddress());
+        location();
     }
 
+    /**
+     * 获取定位信息
+     *
+     * @return 高德定位信息
+     */
     public AMapLocation getLocation() {
         return aMapLocation;
     }
+
+
+    /******************地图操作*******************/
+    public MainActivityIml inject() {
+        return this;
+    }
+
+
+    @Override
+    public void location() {
+        //参数依次是：视角调整区域的中心点坐标、希望调整到的缩放级别、俯仰角0°~45°（垂直与地图时为0）、偏航角 0~360° (正北方为0)
+        if (aMapLocation == null) {
+            return;
+        }
+        LatLng position = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+        CameraUpdate mCameraUpdate =
+                CameraUpdateFactory.newCameraPosition(
+                        new CameraPosition(position, 17, 0, 0));
+        mMapView.getMap().moveCamera(mCameraUpdate);
+        //绘制点
+        MarkerOptions options = new MarkerOptions();
+        mMapView.getMap().addMarker(options);
+
+        Marker marker = mMapView.getMap()
+                .addMarker(new MarkerOptions().position(position)
+//                        .title("默认点标记").snippet("DefaultMarker")
+                );
+
+    }
+
 }
