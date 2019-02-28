@@ -52,6 +52,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rlSystemInformation"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="4dp"
@@ -114,6 +115,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rlMyOrder"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="4dp"

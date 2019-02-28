@@ -1,6 +1,7 @@
 package com.example.administrator.myapplication.activity
 
 import android.os.Bundle
+import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
@@ -31,6 +32,11 @@ class MainActivity : BaseActivity() {
             resetSelect()
             selectUserCenter()
         }
+
+        btGetOrder.setOnClickListener {
+            ActivityUtils.startActivity(SystemInfoActivity::class.java)
+        }
+
     }
 
     private fun initData() {

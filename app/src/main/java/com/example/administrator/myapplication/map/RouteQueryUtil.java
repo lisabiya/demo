@@ -17,5 +17,4 @@ public class RouteQueryUtil {
                 RouteSearch.DRIVING_SINGLE_DEFAULT, null, null, "");
     }
 
-
 }
