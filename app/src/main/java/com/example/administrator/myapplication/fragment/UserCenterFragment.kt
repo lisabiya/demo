@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.blankj.utilcode.util.ActivityUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.activity.MyOrderActivity
+import com.example.administrator.myapplication.activity.MyPurseActivity
 import com.example.administrator.myapplication.activity.SystemInfoActivity
 import com.example.administrator.myapplication.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_user_center.*
@@ -32,7 +33,9 @@ class UserCenterFragment : BaseFragment() {
         rlMyOrder.setOnClickListener {
             ActivityUtils.startActivity(MyOrderActivity::class.java)
         }
-
+        rlMyPurse.setOnClickListener {
+            ActivityUtils.startActivity(MyPurseActivity::class.java)
+        }
     }
 
     override fun initData() {

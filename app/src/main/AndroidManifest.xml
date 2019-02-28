@@ -55,6 +55,7 @@
 
         <activity android:name=".activity.SystemInfoActivity" />
         <activity android:name=".activity.MyOrderActivity" />
+        <activity android:name=".activity.MyPurseActivity" />
 
     </application>
 
