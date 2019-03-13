@@ -4,15 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.blankj.utilcode.util.ActivityUtils
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.administrator.myapplication.R
-import com.example.administrator.myapplication.activity.MyOrderActivity
-import com.example.administrator.myapplication.activity.MyPurseActivity
-import com.example.administrator.myapplication.activity.SystemInfoActivity
+import com.example.administrator.myapplication.UserCenterViewModel
 import com.example.administrator.myapplication.base.BaseFragment
+import com.example.administrator.myapplication.bean.User
 import kotlinx.android.synthetic.main.fragment_user_center.*
 
 class UserCenterFragment : BaseFragment() {
+    public interface UserCenterListener {
+        //业务
+        fun getUsers(): LiveData<User>
+
+
+        //View操作监听
+        fun sysTem()
+
+        fun verified()
+
+        fun myOrder()
+
+        fun myPurse()
+    }
+
+    private lateinit var userCenterListener: UserCenterListener
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,25 +39,33 @@ class UserCenterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userCenterListener = ViewModelProviders.of(this)
+                .get(UserCenterViewModel::class.java).listener
         initView()
         initData()
     }
 
     override fun initView() {
         rlSystemInformation.setOnClickListener {
-            ActivityUtils.startActivity(SystemInfoActivity::class.java)
+            userCenterListener.sysTem()
+        }
+        rlVerified.setOnClickListener {
+            userCenterListener.verified()
         }
         rlMyOrder.setOnClickListener {
-            ActivityUtils.startActivity(MyOrderActivity::class.java)
+            userCenterListener.myOrder()
         }
         rlMyPurse.setOnClickListener {
-            ActivityUtils.startActivity(MyPurseActivity::class.java)
+            userCenterListener.myPurse()
         }
     }
 
     override fun initData() {
         portrait.setActualImageResource(R.drawable.ic_my)
-        tvName.text = "正经的人"
+        userCenterListener.getUsers().observe(this, Observer { user ->
+            tvName.text = user.name
+        })
+
     }
 
 

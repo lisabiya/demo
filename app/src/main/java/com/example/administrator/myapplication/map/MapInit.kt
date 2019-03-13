@@ -3,6 +3,13 @@ package com.example.administrator.myapplication.map
 import android.graphics.Color
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.MyLocationStyle
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Consumer
+import io.reactivex.functions.Function
 
 //地图基本初始化
 fun initMap(map: AMap) {
@@ -25,3 +32,30 @@ fun initMapLocation(map: AMap) {
     map.uiSettings.isMyLocationButtonEnabled = true;//设置默认定位按钮是否显示，非必需设置。
     map.isMyLocationEnabled = true// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
 }
+
+
+private fun rxJava() {
+    Observable.create(ObservableOnSubscribe<String> { })
+            .map(Function<String, Int>() {
+                return@Function it.length
+            })
+            .subscribe(object : Observer<Int> {
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(s: Int) {
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                }
+
+                override fun onComplete() {
+
+                }
+            })
+
+}
+

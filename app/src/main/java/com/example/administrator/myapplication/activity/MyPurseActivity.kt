@@ -1,11 +1,8 @@
 package com.example.administrator.myapplication.activity
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.BarUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.R
-import com.example.administrator.myapplication.adapter.SystemInfoAdapter
 import com.example.administrator.myapplication.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_my_order.*
 

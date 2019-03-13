@@ -17,8 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarLightMode(getWindow(), false);
-        AdaptScreenUtils.adaptWidth(getResources(), 375);
-
+//        AdaptScreenUtils.adaptWidth(getResources(), 375);
     }
 
 }
