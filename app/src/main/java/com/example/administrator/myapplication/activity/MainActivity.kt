@@ -1,17 +1,12 @@
 package com.example.administrator.myapplication.activity
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.fragment.OrderFragment
 import com.example.administrator.myapplication.fragment.UserCenterFragment
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 
 
