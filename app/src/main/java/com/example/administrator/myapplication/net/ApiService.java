@@ -30,6 +30,10 @@ public interface ApiService {
             @Url String url);
 
 
+    @GET
+    Observable<String> getInfo(
+            @Url String url);
+
 
     /**
      * 用户登录

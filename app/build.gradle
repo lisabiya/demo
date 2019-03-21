@@ -54,7 +54,13 @@ dependencies {
     implementation 'com.blankj:utilcode:1.23.5'
     implementation files('libs/AMap3DMap_6.7.0_AMapNavi_6.6.0_AMapSearch_6.5.0_AMapLocation_4.4.0_20190214.jar')
     //lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     //fresco
     implementation 'com.facebook.fresco:fresco:1.9.0'
+    //navigation
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation files('libs/com.coloros.mcssdk.jar')
+    //BaseAdapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+
 }

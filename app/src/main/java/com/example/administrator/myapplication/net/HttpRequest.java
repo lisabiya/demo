@@ -1,7 +1,6 @@
 package com.example.administrator.myapplication.net;
 
 
-
 import com.example.administrator.myapplication.net.rxjava.HttpCallback;
 import com.example.administrator.myapplication.net.rxjava.ObservableDecorator;
 import com.example.administrator.myapplication.net.rxjava.SimpleSubscriber;
@@ -34,6 +33,16 @@ public class HttpRequest {
     public static void getDocList(String url, SimpleSubscriber<String> subscriber) {
         Observable<String> observable = RetrofitUtil.getApiService().
                 getDocList(url);
+        ObservableDecorator.decorate(observable).subscribe(subscriber);
+    }
+
+
+    /**
+     * 获取每日干货
+     */
+    public static void getInfo(SimpleSubscriber<String> subscriber) {
+        Observable<String> observable = RetrofitUtil.getApiService().
+                getInfo("http://gank.io/api/today");
         ObservableDecorator.decorate(observable).subscribe(subscriber);
     }
 

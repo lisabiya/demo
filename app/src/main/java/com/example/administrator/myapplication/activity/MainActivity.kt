@@ -41,6 +41,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initData() {
+        FragmentUtils.add(supportFragmentManager, orderFragment, R.id.fragmentContainer)
+        FragmentUtils.add(supportFragmentManager, userCenterFragment, R.id.fragmentContainer)
         selectUserCenter()
     }
 
@@ -48,16 +50,14 @@ class MainActivity : BaseActivity() {
     private fun selectOrder() {
         ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
-
-        FragmentUtils.replace(supportFragmentManager, orderFragment, R.id.fragmentContainer)
+        FragmentUtils.showHide(orderFragment, userCenterFragment)
     }
 
     //选择个人中心
     private fun selectUserCenter() {
         ivUserCenter.setImageResource(R.mipmap.ic_portrait)
         tvUserCenter.setTextColor(resources.getColor(R.color.colorPrimary))
-
-        FragmentUtils.replace(supportFragmentManager, userCenterFragment, R.id.fragmentContainer)
+        FragmentUtils.showHide(userCenterFragment, orderFragment)
     }
 
     //重置选择

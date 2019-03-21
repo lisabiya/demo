@@ -5,13 +5,14 @@ import com.example.administrator.myapplication.fragment.UserCenterFragment;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.TimeUnit;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.subjects.PublishSubject;
 
 public class UserCenterViewModel extends ViewModel implements UserCenterFragment.UserCenterListener {
@@ -34,46 +35,44 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     public LiveData<User> getUsers() {
         if (users == null) {
             users = new MutableLiveData<>();
-            loadUsers();
+            loadUsers(new User("正经"));
         }
         return users;
     }
 
-    private void loadUsers() {
-        Observable<Integer> observable = Observable.just("")
-                .map(new Function<String, Integer>() {
-                    @Override
-                    public Integer apply(String query) throws Exception {
-                        return query.length();
-                    }
-                });
-        Disposable disposable = observable.subscribe(new Consumer<Integer>() {
-            @Override
-            public void accept(Integer integer) throws Exception {
-                users.postValue(new User("正经"));
-            }
-        });
+    private void loadUsers(User user) {
+        users.postValue(user);
+
+
     }
+
 
 
     //View操作监听
     @Override
     public void sysTem() {
-        users.postValue(new User("sysTem"));
+        loadUsers(new User("sysTem"));
     }
 
     @Override
     public void verified() {
-        users.postValue(new User("verified"));
+        Disposable disposable = Observable.just("delay")
+                .delay(2, TimeUnit.SECONDS)
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) {
+                        loadUsers(new User(s));
+                    }
+                });
     }
 
     @Override
     public void myOrder() {
-        users.postValue(new User("myOrder"));
+        loadUsers(new User("myOrder"));
     }
 
     @Override
     public void myPurse() {
-        users.postValue(new User("myPurse"));
+        loadUsers(new User("myPurse"));
     }
 }

@@ -5,25 +5,19 @@ import com.amap.api.services.route.RouteSearch;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.administrator.myapplication.base.BaseApplication;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function4;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-import kotlin.jvm.functions.Function14;
 
 public class RouteQueryUtil {
 
@@ -101,6 +95,10 @@ public class RouteQueryUtil {
     }
 
     public static void rxJava2() {
+        ArrayList<String> strings = new ArrayList<>();
+        strings.indexOf("");
+
+
         Observable.merge(makeRequest2("aaaa", 200), makeRequest("aaaaa")).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {

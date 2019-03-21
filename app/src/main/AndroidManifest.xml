@@ -24,7 +24,8 @@
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
+    <!--oppo推送-->
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
 
     <application
         android:name=".base.BaseApplication"
@@ -57,6 +58,26 @@
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.MyPurseActivity" />
 
+        <!--oppo推送-->
+        <service
+            android:name="com.coloros.mcssdk.PushService"
+            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE">
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+
+
+        <meta-data
+             android:name="UPA_MPA_CHANNELID"
+            android:value="01382jUzAZv">
+
+        </meta-data>
+        <meta-data
+            android:name="UPA_MPA_APPKEY"
+            android:value="ZRFraa">
+
+        </meta-data>
     </application>
 
 </manifest>
