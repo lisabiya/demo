@@ -2,6 +2,7 @@ package com.example.administrator.myapplication;
 
 import com.example.administrator.myapplication.bean.User;
 import com.example.administrator.myapplication.fragment.UserCenterFragment;
+import com.example.administrator.myapplication.map.RouteQueryUtil;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,11 +48,11 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     }
 
 
-
     //View操作监听
     @Override
     public void sysTem() {
         loadUsers(new User("sysTem"));
+        RouteQueryUtil.rxJava4();
     }
 
     @Override

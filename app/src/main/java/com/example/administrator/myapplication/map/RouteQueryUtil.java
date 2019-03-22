@@ -156,6 +156,12 @@ public class RouteQueryUtil {
         PublishSubject loadPersonsCommand;
 
         PublishSubject<String> subject = PublishSubject.create();
+        Disposable disposable0 = subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                LogUtils.e("disposable0==" + s);
+            }
+        });
         subject.onNext("1");
         subject.onNext("2");
         Disposable disposable1 = subject.subscribe(new Consumer<String>() {
@@ -178,12 +184,29 @@ public class RouteQueryUtil {
         subject.onNext("7");
         subject.onNext("8");
         subject.onComplete();
-        Disposable disposable3 = subject.subscribe(new Consumer<String>() {
+        subject.subscribe(new Observer<String>() {
             @Override
-            public void accept(String s) throws Exception {
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
                 LogUtils.e("disposable3==" + s);
             }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.e("disposable3==" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
         });
+        subject.onNext("9");
+        subject.onNext("10");
     }
 
 

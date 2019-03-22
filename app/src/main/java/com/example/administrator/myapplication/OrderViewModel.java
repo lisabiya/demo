@@ -2,6 +2,7 @@ package com.example.administrator.myapplication;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.example.administrator.myapplication.base.BaseApplication;
+import com.example.administrator.myapplication.bean.Happiness;
 import com.example.administrator.myapplication.bean.Info;
 import com.example.administrator.myapplication.fragment.OrderFragment;
 import com.example.administrator.myapplication.net.HttpRequest;
@@ -15,6 +16,8 @@ import androidx.lifecycle.ViewModel;
 
 public class OrderViewModel extends ViewModel implements OrderFragment.OrderListener {
     private MutableLiveData<Info> mInfo;
+    private MutableLiveData<Happiness> happiness;
+
 
     public OrderFragment.OrderListener getListener() {
         return this;
@@ -37,6 +40,22 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
     }
 
 
+    @NotNull
+    @Override
+    public LiveData<Happiness> getHappiness() {
+        if (happiness == null) {
+            happiness = new MutableLiveData<>();
+            getHappinessWeb();
+        }
+        return happiness;
+    }
+
+    @Override
+    public void onRefresh() {
+        getHappinessWeb();
+    }
+
+    //获取每日推荐
     private void getInfoWeb() {
         HttpRequest.getInfo(new SimpleSubscriber<String>(BaseApplication.getInstance()) {
             @Override
@@ -54,4 +73,25 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
             }
         });
     }
+
+
+    //获取每日推荐
+    private void getHappinessWeb() {
+        HttpRequest.getHappiness(new SimpleSubscriber<String>(BaseApplication.getInstance()) {
+            @Override
+            public void onNext(String s) {
+                super.onNext(s);
+                Happiness info = GsonUtils.fromJson(s, Happiness.class);
+                if (happiness != null) {
+                    happiness.postValue(info);
+                }
+            }
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+            }
+        });
+    }
+
 }

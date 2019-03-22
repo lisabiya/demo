@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.OrderViewModel
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.adapter.InfoAdapter
 import com.example.administrator.myapplication.base.BaseFragment
+import com.example.administrator.myapplication.bean.Happiness
 import com.example.administrator.myapplication.bean.Info
 import kotlinx.android.synthetic.main.fragment_orderr.*
+import java.util.*
 
 class OrderFragment : BaseFragment() {
 
@@ -22,7 +24,10 @@ class OrderFragment : BaseFragment() {
         //业务
         fun getInfo(): LiveData<Info>
 
+        fun getHappiness(): LiveData<Happiness>
+
         //动作监听
+        fun onRefresh();
     }
 
     private lateinit var orderListener: OrderListener;
@@ -46,16 +51,23 @@ class OrderFragment : BaseFragment() {
     }
 
     override fun initData() {
-        rvList.layoutManager = LinearLayoutManager(context)
-        orderListener.getInfo().observe(this, Observer { info ->
+        rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        orderListener.getHappiness().observe(this, Observer { happyiness ->
+            val list = ArrayList<Happiness.ResultsBean>();
+            list.addAll(happyiness.results)
             if (rvList.adapter == null) {
-                val adapter = InfoAdapter(info.results.happy);
+                val adapter = InfoAdapter(list);
                 rvList.adapter = adapter;
             } else {
                 (rvList.adapter as InfoAdapter).data.clear()
-                (rvList.adapter as InfoAdapter).data.addAll(info.results.happy)
+                (rvList.adapter as InfoAdapter).data.addAll(list)
+                (rvList.adapter as InfoAdapter).notifyDataSetChanged()
             }
         })
+
+        refresh.setOnClickListener {
+            orderListener.onRefresh()
+        }
 
     }
 
