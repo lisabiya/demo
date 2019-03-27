@@ -30,6 +30,7 @@ public class InfoAdapter extends BaseQuickAdapter<Happiness.ResultsBean, BaseVie
     protected void convert(BaseViewHolder helper, Happiness.ResultsBean item) {
         if (item == null) return;
         helper.setText(R.id.tvInfo, item.getDesc());
+
         SimpleDraweeView simpleDraweeView = helper.getView(R.id.ivImage);
         if (item.getUrl() != null) {
             setControllerListener(simpleDraweeView, item.getUrl());

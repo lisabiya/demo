@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.UserCenterViewModel
 import com.example.administrator.myapplication.base.BaseFragment
 import com.example.administrator.myapplication.bean.User
+import com.example.administrator.myapplication.rxpopup.RxPopup
 import com.example.administrator.myapplication.rxpopup.showSimplePop
 import kotlinx.android.synthetic.main.fragment_user_center.*
 
@@ -54,16 +53,18 @@ class UserCenterFragment : BaseFragment() {
         rlSystemInformation.setOnClickListener {
             val fragmentManager: FragmentManager? = getFragmentManager();
             if (fragmentManager != null) {
-                showSimplePop(fragmentManager, R.layout.fragment_dialog) { view ->
-                    val close = view.findViewById<ImageView>(R.id.ivClose)
-                    val bt = view.findViewById<Button>(R.id.btSet)
-                    close.setOnClickListener {
-                        ToastUtils.showShort("close")
+                showSimplePop(fragmentManager, R.layout.fragment_dialog, object : RxPopup() {
+                    override fun onViewCreated(view: View) {
+                        setCancelable(true)
+                        val message = view.findViewById<TextView>(R.id.tvMessage)
+                        setViewOnClick(R.id.ivClose) {
+                            dismiss()
+                        }
+                        setViewOnClick(R.id.btSet) {
+                            message.text = "btSet"
+                        }
                     }
-                    bt.setOnClickListener {
-                        ToastUtils.showShort("bt")
-                    }
-                }
+                })
             }
             userCenterListener.sysTem()
         }
