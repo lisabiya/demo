@@ -20,6 +20,7 @@ class MainActivity : BaseActivity() {
     private val orderFragment = OrderFragment()
     private val emptyFragment = EmptyFragment()
 
+    private var key = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : BaseActivity() {
             selectEmpty()
         }
         llOrder.setOnLongClickListener {
+            if (key != 5) return@setOnLongClickListener true
             resetSelect()
             selectOrder()
             return@setOnLongClickListener true
@@ -54,11 +56,13 @@ class MainActivity : BaseActivity() {
         FragmentUtils.add(supportFragmentManager, orderFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, userCenterFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, emptyFragment, R.id.fragmentContainer)
+        resetSelect()
         selectUserCenter()
     }
 
     //选择空
     private fun selectEmpty() {
+        key++;
         ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.show(emptyFragment)
@@ -66,6 +70,7 @@ class MainActivity : BaseActivity() {
 
     //选择订单
     private fun selectOrder() {
+        key++;
         ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.showHide(orderFragment)
@@ -73,6 +78,7 @@ class MainActivity : BaseActivity() {
 
     //选择个人中心
     private fun selectUserCenter() {
+        key = 0;
         ivUserCenter.setImageResource(R.mipmap.ic_portrait)
         tvUserCenter.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.showHide(userCenterFragment)

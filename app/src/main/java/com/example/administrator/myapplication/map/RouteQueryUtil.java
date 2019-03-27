@@ -164,6 +164,7 @@ public class RouteQueryUtil {
         });
         subject.onNext("1");
         subject.onNext("2");
+
         Disposable disposable1 = subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {

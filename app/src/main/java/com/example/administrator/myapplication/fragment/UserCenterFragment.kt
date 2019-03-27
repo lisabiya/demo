@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +12,7 @@ import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.UserCenterViewModel
 import com.example.administrator.myapplication.base.BaseFragment
 import com.example.administrator.myapplication.bean.User
+import com.example.administrator.myapplication.rxpopup.showSimplePop
 import kotlinx.android.synthetic.main.fragment_user_center.*
 
 class UserCenterFragment : BaseFragment() {
@@ -47,6 +49,12 @@ class UserCenterFragment : BaseFragment() {
 
     override fun initView() {
         rlSystemInformation.setOnClickListener {
+            val fragmentManager: FragmentManager? = getFragmentManager();
+            if (fragmentManager != null) {
+                showSimplePop(fragmentManager, R.layout.fragment_dialog) { view ->
+
+                }
+            }
             userCenterListener.sysTem()
         }
         rlVerified.setOnClickListener {

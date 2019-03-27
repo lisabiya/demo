@@ -34,9 +34,7 @@ public class InfoAdapter extends BaseQuickAdapter<Happiness.ResultsBean, BaseVie
         if (item.getUrl() != null) {
             setControllerListener(simpleDraweeView, item.getUrl());
         }
-
     }
-
 
     private void setControllerListener(final SimpleDraweeView simpleDraweeView, String imagePath) {
         ControllerListener<ImageInfo> controllerListener = new BaseControllerListener<ImageInfo>() {

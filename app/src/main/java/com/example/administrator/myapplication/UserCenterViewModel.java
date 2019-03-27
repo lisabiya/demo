@@ -43,8 +43,6 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
 
     private void loadUsers(User user) {
         users.postValue(user);
-
-
     }
 
 
