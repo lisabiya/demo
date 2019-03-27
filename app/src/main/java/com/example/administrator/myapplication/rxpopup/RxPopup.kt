@@ -7,7 +7,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 
-fun showSimplePop(fragmentManager: FragmentManager, resource: Int, onViewCreate: (View) -> String) {
+fun showSimplePop(fragmentManager: FragmentManager, resource: Int, onViewCreated: (View) -> Unit) {
     val rxPopupFragment = RxPopupFragment.instance(R.layout.fragment_dialog);
     val observer = object : Observer<View> {
         override fun onComplete() {
@@ -17,7 +17,7 @@ fun showSimplePop(fragmentManager: FragmentManager, resource: Int, onViewCreate:
         }
 
         override fun onNext(view: View) {
-            onViewCreate(view)
+            onViewCreated(view)
         }
 
         override fun onError(e: Throwable) {
