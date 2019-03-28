@@ -69,14 +69,14 @@ class ProxyFactory(private val target: Any) {
                 object : InvocationHandler {
                     @Throws(Throwable::class)
                     override fun invoke(proxy: Any, method: Method, args: Array<Any>?): Any? {
-                        println("开始事务2")
+                        println("开始事务")
                         //执行目标对象方法
                         val returnValue: Any? = if (args == null) {
                             method.invoke(target)
                         } else {
                             method.invoke(target, *args)
                         }
-                        println("提交事务2")
+                        println("提交事务1")
                         println()
                         return returnValue
                     }

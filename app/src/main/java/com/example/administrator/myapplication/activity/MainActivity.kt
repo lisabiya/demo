@@ -48,7 +48,10 @@ class MainActivity : BaseActivity() {
             selectEmpty()
         }
         llOrder.setOnLongClickListener {
-            if (key != 5) return@setOnLongClickListener true
+            if (key != 5) {
+                key = 0;
+                return@setOnLongClickListener true
+            }
             resetSelect()
             selectOrder()
             return@setOnLongClickListener true
@@ -83,7 +86,6 @@ class MainActivity : BaseActivity() {
 
     //选择订单
     private fun selectOrder() {
-        key++;
         ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.showHide(orderFragment)
