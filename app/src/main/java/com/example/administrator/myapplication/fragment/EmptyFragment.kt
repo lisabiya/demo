@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseFragment
-import com.example.administrator.myapplication.map.MapViewManager
-import kotlinx.android.synthetic.main.activity_my_order.*
 
 class EmptyFragment : BaseFragment() {
 
@@ -18,7 +16,6 @@ class EmptyFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        aMap.onCreate(savedInstanceState)
         initView()
         initData()
     }
@@ -27,8 +24,6 @@ class EmptyFragment : BaseFragment() {
     }
 
     override fun initData() {
-        val manager = MapViewManager(aMap)
-        lifecycle.addObserver(manager)
     }
 
 

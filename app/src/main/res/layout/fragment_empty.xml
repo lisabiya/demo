@@ -3,10 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_grey">
+    android:background="@color/bg_grey"
+    android:gravity="center">
 
-    <com.amap.api.maps.MapView
-        android:id="@+id/aMap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_corner_orange"
+        android:padding="16dp"
+        android:text="@string/order"
+        android:textColor="@color/white"
+        android:textSize="36sp" />
+
 </LinearLayout>
