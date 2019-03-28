@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.OrderViewModel
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.adapter.InfoAdapter
@@ -27,10 +26,10 @@ class OrderFragment : BaseFragment() {
         fun getHappiness(): LiveData<Happiness>
 
         //动作监听
-        fun onRefresh();
+        fun onRefresh()
     }
 
-    private lateinit var orderListener: OrderListener;
+    private lateinit var orderListener: OrderListener
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_orderr, container, false)
@@ -45,19 +44,16 @@ class OrderFragment : BaseFragment() {
     }
 
     override fun initView() {
-        add(10) {
-            ToastUtils.showLong(it)
-        }
     }
 
     override fun initData() {
         rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        orderListener.getHappiness().observe(this, Observer { happyiness ->
-            val list = ArrayList<Happiness.ResultsBean>();
-            list.addAll(happyiness.results)
+        orderListener.getHappiness().observe(this, Observer { happiness ->
+            val list = ArrayList<Happiness.ResultsBean>()
+            list.addAll(happiness.results)
             if (rvList.adapter == null) {
-                val adapter = InfoAdapter(list);
-                rvList.adapter = adapter;
+                val adapter = InfoAdapter(list)
+                rvList.adapter = adapter
             } else {
                 (rvList.adapter as InfoAdapter).data.clear()
                 (rvList.adapter as InfoAdapter).data.addAll(list)
@@ -69,10 +65,6 @@ class OrderFragment : BaseFragment() {
             orderListener.onRefresh()
         }
 
-    }
-
-    private fun add(int: Int, string: (String) -> Unit) {
-        string("" + int);
     }
 
 

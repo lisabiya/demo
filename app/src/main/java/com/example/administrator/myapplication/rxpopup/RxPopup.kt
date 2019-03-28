@@ -20,12 +20,12 @@ abstract class RxPopup {
             }
 
             override fun onNext(view: View) {
-                mView = view;
+                mView = view
                 onViewCreated(view)
             }
 
             override fun onError(e: Throwable) {
-
+                e.printStackTrace()
             }
         }
         rxPopupFragment.subscribe(observer)
@@ -35,13 +35,13 @@ abstract class RxPopup {
     protected abstract fun onViewCreated(view: View)
 
     protected fun setViewOnClick(resource: Int, onClick: () -> Unit) {
-        mView.findViewById<View>(resource).setOnClickListener {
+        mView.findViewById<View>(resource).setOnClickListener { it ->
             onClick()
         }
     }
 
 
-    protected fun setCancelable(boolean: Boolean) {
+    fun setCancelable(boolean: Boolean) {
         rxPopupFragment.isCancelable = boolean
     }
 
