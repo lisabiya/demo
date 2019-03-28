@@ -12,5 +12,7 @@
     <string name="my_purse">我的钱包</string>
     <string name="setting">设置中心</string>
     <string name="rp_record">奖惩记录</string>
+    <string name="map">地图</string>
+    <string name="message">消息</string>
 
 </resources>

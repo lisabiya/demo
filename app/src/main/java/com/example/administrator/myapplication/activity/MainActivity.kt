@@ -3,8 +3,11 @@ package com.example.administrator.myapplication.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
+import com.blankj.utilcode.util.PermissionUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.fragment.EmptyFragment
@@ -27,6 +30,16 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initView()
         initData()
+        PermissionUtils.permission(PermissionConstants.STORAGE).callback(object : PermissionUtils.SimpleCallback {
+            override fun onGranted() {
+                ToastUtils.showLong("同意")
+            }
+
+            override fun onDenied() {
+                ToastUtils.showLong("拒绝")
+            }
+
+        })
     }
 
     private fun initView() {
@@ -47,7 +60,7 @@ class MainActivity : BaseActivity() {
         }
 
         btGetOrder.setOnClickListener {
-            ActivityUtils.startActivity(SystemInfoActivity::class.java)
+            ActivityUtils.startActivity(MyOrderActivity::class.java)
         }
 
     }

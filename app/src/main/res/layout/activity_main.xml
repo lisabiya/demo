@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
-                android:text="@string/order"
+                android:text="@string/message"
                 android:textColor="@color/txt_gray"
                 android:textSize="10dp" />
 
@@ -88,7 +88,7 @@
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="12dp"
         android:background="@drawable/shape_round_orange"
-        android:text="@string/get_order"
+        android:text="@string/map"
         android:textColor="@color/white"
         android:textSize="@dimen/txtsize_subhead" />
 

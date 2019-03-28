@@ -1,11 +1,9 @@
 package com.example.administrator.myapplication.activity
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.R
-import com.example.administrator.myapplication.adapter.SystemInfoAdapter
 import com.example.administrator.myapplication.base.BaseActivity
+import com.example.administrator.myapplication.map.MapViewManager
 import kotlinx.android.synthetic.main.activity_my_order.*
 
 class MyOrderActivity : BaseActivity() {
@@ -14,6 +12,8 @@ class MyOrderActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_order)
+        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
+        aMap.onCreate(savedInstanceState);
         initView()
         initData()
     }
@@ -26,13 +26,7 @@ class MyOrderActivity : BaseActivity() {
 
 
     private fun initData() {
-        val list = ArrayList<String>()
-        for (index in 1..10) {
-            list.add("订单$index")
-        }
-        rvMyOrder.layoutManager = LinearLayoutManager(this)
-        rvMyOrder.adapter = SystemInfoAdapter(this, list, SystemInfoAdapter.OnItemClickListener {
-            ToastUtils.showShort(list[it])
-        })
+        val manager = MapViewManager(aMap)
+        lifecycle.addObserver(manager)
     }
 }
