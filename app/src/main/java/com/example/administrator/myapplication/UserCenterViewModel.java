@@ -58,7 +58,7 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     @Override
     public void sysTem(FragmentManager fragmentManager) {
         loadUsers(new User("sysTem"));
-        RouteQueryUtil.rxJava4();
+        RouteQueryUtil.rxJava5();
         showSimplePop(fragmentManager);
     }
 

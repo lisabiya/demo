@@ -11,14 +11,16 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Function4;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.ReplaySubject;
 
 public class RouteQueryUtil {
 
@@ -157,7 +159,7 @@ public class RouteQueryUtil {
     public static void rxJava4() {
         PublishSubject loadPersonsCommand;
 
-        ReplaySubject<String> subject = ReplaySubject.create();
+        PublishSubject<String> subject = PublishSubject.create();
         Disposable disposable0 = subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
@@ -210,6 +212,57 @@ public class RouteQueryUtil {
         });
         subject.onNext("9");
         subject.onNext("10");
+    }
+
+    public static void rxJava5() {
+        PublishSubject<String> subject = PublishSubject.create();
+
+        Disposable disposable = subject
+                .compose(new ObservableTransformer<String, String>() {
+                    @Override
+                    public ObservableSource<String> apply(Observable<String> upstream) {
+//                        return upstream.filter(new Predicate<String>() {
+//                            @Override
+//                            public boolean test(String s) throws Exception {
+//                                LogUtils.e("ObservableTransformer==" + s);
+//                                return Integer.valueOf(s) == 6;
+//                            }
+//                        });
+                        return upstream.takeWhile(new Predicate<String>() {
+                            @Override
+                            public boolean test(String s) throws Exception {
+                                LogUtils.e("ObservableTransformer==" + s);
+                                return Integer.valueOf(s) != 6;
+                            }
+                        });
+////
+//                        return upstream.takeUntil(new Predicate<String>() {
+//                            @Override
+//                            public boolean test(String s) throws Exception {
+//                                LogUtils.e("ObservableTransformer==" + s);
+//                                return Integer.valueOf(s) == 6;
+//                            }
+//                        });
+
+                    }
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        LogUtils.e("disposable1==" + s);
+                    }
+                });
+        subject.onNext("1");
+        subject.onNext("2");
+        subject.onNext("3");
+        subject.onNext("4");
+        subject.onNext("5");
+        subject.onNext("6");
+        subject.onNext("7");
+        subject.onNext("8");
+        subject.onNext("9");
+        subject.onNext("10");
+        subject.onComplete();
     }
 
 
