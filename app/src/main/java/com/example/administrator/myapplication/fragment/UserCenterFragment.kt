@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +28,7 @@ class UserCenterFragment : BaseFragment() {
 
         fun myOrder()
 
-        fun myPurse()
+        fun myPurse(activity: Activity?)
     }
 
     private lateinit var userCenterListener: UserCenterListener
@@ -57,7 +58,7 @@ class UserCenterFragment : BaseFragment() {
             userCenterListener.myOrder()
         }
         rlMyPurse.setOnClickListener {
-            userCenterListener.myPurse()
+            userCenterListener.myPurse(activity)
         }
     }
 

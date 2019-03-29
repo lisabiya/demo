@@ -18,6 +18,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Function4;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.ReplaySubject;
 
 public class RouteQueryUtil {
 
@@ -41,7 +42,8 @@ public class RouteQueryUtil {
                 LogUtils.e("subscribe=" + 0);
                 e.onNext("");
             }
-        }).observeOn(Schedulers.io())
+        })
+                .observeOn(Schedulers.io())
                 .map(new Function<String, Integer>() {
                     @Override
                     public Integer apply(String s) throws Exception {
@@ -155,7 +157,7 @@ public class RouteQueryUtil {
     public static void rxJava4() {
         PublishSubject loadPersonsCommand;
 
-        PublishSubject<String> subject = PublishSubject.create();
+        ReplaySubject<String> subject = ReplaySubject.create();
         Disposable disposable0 = subject.subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
@@ -184,7 +186,7 @@ public class RouteQueryUtil {
         subject.onNext("6");
         subject.onNext("7");
         subject.onNext("8");
-        subject.onComplete();
+//        subject.onComplete();
         subject.subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {

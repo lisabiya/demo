@@ -2,7 +2,10 @@ package com.example.administrator.myapplication.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.KeyEvent
+import androidx.transition.ChangeBounds
+import androidx.transition.Slide
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
@@ -69,6 +72,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initData() {
+        val slideTransition = Slide(Gravity.START)
+        slideTransition.duration = 500
+        //设置进入与退出效果
+        userCenterFragment.reenterTransition = slideTransition
+        userCenterFragment.enterTransition = slideTransition
+        userCenterFragment.exitTransition = slideTransition
+        userCenterFragment.sharedElementEnterTransition = ChangeBounds()
+
         FragmentUtils.add(supportFragmentManager, orderFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, userCenterFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, emptyFragment, R.id.fragmentContainer)

@@ -1,5 +1,10 @@
 package com.example.administrator.myapplication;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+
+import com.example.administrator.myapplication.activity.MyPurseActivity;
 import com.example.administrator.myapplication.bean.User;
 import com.example.administrator.myapplication.fragment.UserCenterFragment;
 import com.example.administrator.myapplication.map.RouteQueryUtil;
@@ -75,7 +80,11 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     }
 
     @Override
-    public void myPurse() {
+    public void myPurse(Activity activity) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions compat = ActivityOptions.makeSceneTransitionAnimation(activity);
+            activity.startActivity(new Intent(activity, MyPurseActivity.class), compat.toBundle());
+        }
         loadUsers(new User("myPurse"));
     }
 }
