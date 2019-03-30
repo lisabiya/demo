@@ -1,7 +1,11 @@
 package com.example.administrator.myapplication.fragment
 
 import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.UserCenterViewModel
+import com.example.administrator.myapplication.activity.MyPurseActivity
 import com.example.administrator.myapplication.base.BaseFragment
 import com.example.administrator.myapplication.bean.User
 import kotlinx.android.synthetic.main.fragment_user_center.*
@@ -57,8 +62,15 @@ class UserCenterFragment : BaseFragment() {
         rlMyOrder.setOnClickListener {
             userCenterListener.myOrder()
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        }
+
         rlMyPurse.setOnClickListener {
-            userCenterListener.myPurse(activity)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                val compat = ActivityOptions.makeSceneTransitionAnimation(activity, Pair(rlMyPurse, "rlMyPurse"))
+                activity!!.startActivity(Intent(activity, MyPurseActivity::class.java), compat.toBundle())
+            }
+//            userCenterListener.myPurse(activity)
         }
     }
 

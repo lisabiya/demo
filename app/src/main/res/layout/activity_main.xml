@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_grey"
     tools:context=".activity.MainActivity">
 
     <FrameLayout
@@ -35,7 +34,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_blue_anchor" />
+                android:src="@mipmap/ic_home" />
 
             <TextView
                 android:id="@+id/tvOrder"
@@ -43,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
-                android:text="@string/message"
+                android:text="@string/home_page"
                 android:textColor="@color/txt_gray"
                 android:textSize="10dp" />
 
@@ -65,7 +64,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_portrait" />
+                android:src="@mipmap/ic_user" />
 
             <TextView
                 android:id="@+id/tvUserCenter"

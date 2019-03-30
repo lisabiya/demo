@@ -1,11 +1,15 @@
 package com.example.administrator.myapplication.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.fragment_empty.*
+
 
 class EmptyFragment : BaseFragment() {
 
@@ -21,10 +25,21 @@ class EmptyFragment : BaseFragment() {
     }
 
     override fun initView() {
+        btGetOrder.setOnClickListener {
+            initDialog()
+        }
     }
 
     override fun initData() {
     }
 
+    private fun initDialog() {
+        val bottomSheetDialog = BottomSheetDialog(activity!!);
+        val dialogView = bottomSheetDialog.layoutInflater.inflate(R.layout.dialog_bottom, null)
+        bottomSheetDialog.setContentView(dialogView);
+        (dialogView.parent as View).setBackgroundColor(Color.TRANSPARENT);
+        //给布局设置透明背景色
+        bottomSheetDialog.show();
+    }
 
 }

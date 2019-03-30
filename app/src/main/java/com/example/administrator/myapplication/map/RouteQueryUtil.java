@@ -217,6 +217,21 @@ public class RouteQueryUtil {
     public static void rxJava5() {
         PublishSubject<String> subject = PublishSubject.create();
 
+        Observable<Long> observable = Observable.interval(1000, TimeUnit.MILLISECONDS);
+
+        Disposable disposable1 = observable.takeWhile(new Predicate<Long>() {
+            @Override
+            public boolean test(Long aLong) throws Exception {
+                LogUtils.e("takeUntil==" + aLong);
+                return aLong != 10;
+            }
+        }).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                LogUtils.e("new==" + aLong);
+            }
+        });
+
         Disposable disposable = subject
                 .compose(new ObservableTransformer<String, String>() {
                     @Override
@@ -232,7 +247,7 @@ public class RouteQueryUtil {
                             @Override
                             public boolean test(String s) throws Exception {
                                 LogUtils.e("ObservableTransformer==" + s);
-                                return Integer.valueOf(s) != 6;
+                                return Integer.valueOf(s) == 6;
                             }
                         });
 ////
@@ -262,7 +277,7 @@ public class RouteQueryUtil {
         subject.onNext("8");
         subject.onNext("9");
         subject.onNext("10");
-        subject.onComplete();
+//        subject.onComplete();
     }
 
 

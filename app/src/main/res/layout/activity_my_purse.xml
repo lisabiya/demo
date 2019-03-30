@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/white" />
     <!--title-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,7 +46,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_message" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +78,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_verified" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,7 +110,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_order" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -132,13 +136,14 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/border_shadow"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:transitionName="rlMyPurse">
 
         <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_purse" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,7 +174,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_setting" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -200,7 +205,7 @@
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_reward" />
 
         <TextView
             android:layout_width="wrap_content"

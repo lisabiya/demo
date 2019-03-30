@@ -1,16 +1,15 @@
 package com.example.administrator.myapplication.activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.Explode
+import android.transition.Slide
 import android.view.Gravity
 import android.view.KeyEvent
-import androidx.transition.ChangeBounds
-import androidx.transition.Slide
-import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
-import com.blankj.utilcode.util.PermissionUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.fragment.EmptyFragment
@@ -31,18 +30,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initTransaction()
         initView()
         initData()
-        PermissionUtils.permission(PermissionConstants.STORAGE).callback(object : PermissionUtils.SimpleCallback {
-            override fun onGranted() {
-                ToastUtils.showLong("同意")
-            }
-
-            override fun onDenied() {
-                ToastUtils.showLong("拒绝")
-            }
-
-        })
     }
 
     private fun initView() {
@@ -72,14 +62,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initData() {
-        val slideTransition = Slide(Gravity.START)
-        slideTransition.duration = 500
-        //设置进入与退出效果
-        userCenterFragment.reenterTransition = slideTransition
-        userCenterFragment.enterTransition = slideTransition
-        userCenterFragment.exitTransition = slideTransition
-        userCenterFragment.sharedElementEnterTransition = ChangeBounds()
-
         FragmentUtils.add(supportFragmentManager, orderFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, userCenterFragment, R.id.fragmentContainer)
         FragmentUtils.add(supportFragmentManager, emptyFragment, R.id.fragmentContainer)
@@ -90,14 +72,14 @@ class MainActivity : BaseActivity() {
     //选择空
     private fun selectEmpty() {
         key++;
-        ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
+        ivOrder.setImageResource(R.mipmap.ic_home)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.show(emptyFragment)
     }
 
     //选择订单
     private fun selectOrder() {
-        ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
+        ivOrder.setImageResource(R.mipmap.ic_home)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.showHide(orderFragment)
     }
@@ -105,17 +87,17 @@ class MainActivity : BaseActivity() {
     //选择个人中心
     private fun selectUserCenter() {
         key = 0;
-        ivUserCenter.setImageResource(R.mipmap.ic_portrait)
+        ivUserCenter.setImageResource(R.mipmap.ic_user)
         tvUserCenter.setTextColor(resources.getColor(R.color.colorPrimary))
         FragmentUtils.showHide(userCenterFragment)
     }
 
     //重置选择
     private fun resetSelect() {
-        ivOrder.setImageResource(R.mipmap.ic_blue_anchor)
+        ivOrder.setImageResource(R.mipmap.ic_home)
         tvOrder.setTextColor(resources.getColor(R.color.txt_gray))
 
-        ivUserCenter.setImageResource(R.mipmap.ic_portrait)
+        ivUserCenter.setImageResource(R.mipmap.ic_user)
         tvUserCenter.setTextColor(resources.getColor(R.color.txt_gray))
 
 
@@ -134,4 +116,35 @@ class MainActivity : BaseActivity() {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
+    private fun initTransaction() {
+        //设置进入与退出效果
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //activity
+            val slide = Explode()
+            slide.duration = 300
+            window.exitTransition = slide
+
+            val slide2 = Explode()
+            slide2.duration = 300
+            window.reenterTransition = slide2
+
+            //Fragment
+            val slideTransition = Slide(Gravity.START)
+            slideTransition.duration = 300
+            emptyFragment.reenterTransition = slideTransition
+            emptyFragment.enterTransition = slideTransition
+            emptyFragment.exitTransition = slideTransition
+            emptyFragment.sharedElementEnterTransition = ChangeBounds()
+
+//            val explode = Explode()
+//            explode.duration = 300
+//            userCenterFragment.reenterTransition = explode
+//            userCenterFragment.enterTransition = explode
+//            userCenterFragment.exitTransition = explode
+//            userCenterFragment.sharedElementEnterTransition = ChangeBounds()
+        }
+    }
+
 }
