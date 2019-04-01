@@ -217,48 +217,66 @@ public class RouteQueryUtil {
     public static void rxJava5() {
         PublishSubject<String> subject = PublishSubject.create();
 
-        Observable<Long> observable = Observable.interval(1000, TimeUnit.MILLISECONDS);
+        Observable<Integer> observable = Observable.just(1);
 
-        Disposable disposable1 = observable.takeWhile(new Predicate<Long>() {
-            @Override
-            public boolean test(Long aLong) throws Exception {
-                LogUtils.e("takeUntil==" + aLong);
-                return aLong != 10;
-            }
-        }).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                LogUtils.e("new==" + aLong);
-            }
-        });
+        observable
+                .startWith(Observable.range(5, 4))
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        LogUtils.e("onSubscribe");
+                    }
 
+                    @Override
+                    public void onNext(Integer s) {
+                        LogUtils.e("onNext=" + s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtils.e("onComplete");
+                    }
+                });
+
+
+        final int type = 1;
         Disposable disposable = subject
                 .compose(new ObservableTransformer<String, String>() {
                     @Override
                     public ObservableSource<String> apply(Observable<String> upstream) {
-//                        return upstream.filter(new Predicate<String>() {
-//                            @Override
-//                            public boolean test(String s) throws Exception {
-//                                LogUtils.e("ObservableTransformer==" + s);
-//                                return Integer.valueOf(s) == 6;
-//                            }
-//                        });
-                        return upstream.takeWhile(new Predicate<String>() {
-                            @Override
-                            public boolean test(String s) throws Exception {
-                                LogUtils.e("ObservableTransformer==" + s);
-                                return Integer.valueOf(s) == 6;
-                            }
-                        });
-////
-//                        return upstream.takeUntil(new Predicate<String>() {
-//                            @Override
-//                            public boolean test(String s) throws Exception {
-//                                LogUtils.e("ObservableTransformer==" + s);
-//                                return Integer.valueOf(s) == 6;
-//                            }
-//                        });
 
+                        switch (type) {
+                            case 1:
+                                return upstream.filter(new Predicate<String>() {
+                                    @Override
+                                    public boolean test(String s) throws Exception {
+                                        LogUtils.e("ObservableTransformer==" + s);
+                                        return Integer.valueOf(s) == 6;
+                                    }
+                                });
+                            case 2:
+                                return upstream.takeWhile(new Predicate<String>() {
+                                    @Override
+                                    public boolean test(String s) throws Exception {
+                                        LogUtils.e("ObservableTransformer==" + s);
+                                        return Integer.valueOf(s) == 6;
+                                    }
+                                });
+                            case 3:
+                                return upstream.takeUntil(new Predicate<String>() {
+                                    @Override
+                                    public boolean test(String s) throws Exception {
+                                        LogUtils.e("ObservableTransformer==" + s);
+                                        return Integer.valueOf(s) == 6;
+                                    }
+                                });
+                        }
+                        return null;
                     }
                 })
                 .subscribe(new Consumer<String>() {
@@ -277,7 +295,7 @@ public class RouteQueryUtil {
         subject.onNext("8");
         subject.onNext("9");
         subject.onNext("10");
-//        subject.onComplete();
+        subject.onComplete();
     }
 
 

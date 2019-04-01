@@ -100,7 +100,6 @@ class MainActivity : BaseActivity() {
         ivUserCenter.setImageResource(R.mipmap.ic_user)
         tvUserCenter.setTextColor(resources.getColor(R.color.txt_gray))
 
-
         FragmentUtils.hide(emptyFragment)
         FragmentUtils.hide(orderFragment)
         FragmentUtils.hide(userCenterFragment)
