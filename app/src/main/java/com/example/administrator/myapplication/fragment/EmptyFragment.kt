@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -33,9 +34,19 @@ class EmptyFragment : BaseFragment() {
     override fun initData() {
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            onViewShow()
+        }
+    }
+
     private fun initDialog() {
         val bottomSheetDialog = BottomSheetDialog(activity!!);
         val dialogView = bottomSheetDialog.layoutInflater.inflate(R.layout.dialog_bottom, null)
+        dialogView.findViewById<Button>(R.id.btOk).setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
         bottomSheetDialog.setContentView(dialogView);
         (dialogView.parent as View).setBackgroundColor(Color.TRANSPARENT);
         //给布局设置透明背景色

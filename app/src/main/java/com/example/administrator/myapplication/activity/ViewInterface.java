@@ -1,13 +1,9 @@
 package com.example.administrator.myapplication.activity;
 
+import android.view.View;
+
 import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
-public interface ViewInterface extends Observer {
+public interface ViewInterface extends Observer<View> {
 
-    @Override
-    void onSubscribe(Disposable d);
-
-    @Override
-    void onNext(Object o);
 }

@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.example.administrator.myapplication.base.BaseApplication;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -14,6 +15,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -21,6 +23,10 @@ import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class RouteQueryUtil {
 
@@ -215,8 +221,6 @@ public class RouteQueryUtil {
     }
 
     public static void rxJava5() {
-        PublishSubject<String> subject = PublishSubject.create();
-
         Observable<Integer> observable = Observable.just(1);
 
         observable
@@ -243,8 +247,9 @@ public class RouteQueryUtil {
                     }
                 });
 
-
-        final int type = 1;
+        //compose
+        PublishSubject<String> subject = PublishSubject.create();
+        final int type = 0;
         Disposable disposable = subject
                 .compose(new ObservableTransformer<String, String>() {
                     @Override
@@ -298,6 +303,82 @@ public class RouteQueryUtil {
         subject.onComplete();
     }
 
+
+    public static void rxJavaBuffer() {
+        PublishSubject<String> subject = PublishSubject.create();
+        Disposable disposable = subject
+                .compose(new ObservableTransformer<String, String>() {
+                    @Override
+                    public ObservableSource<String> apply(Observable<String> upstream) {
+                        return upstream.filter(new Predicate<String>() {
+                            @Override
+                            public boolean test(String s) throws Exception {
+                                LogUtils.e("ObservableTransformer==" + s);
+                                return Integer.valueOf(s) != 6;
+                            }
+                        });
+                    }
+                })
+                .buffer(3)
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> s) throws Exception {
+                        StringBuilder content = new StringBuilder();
+                        for (String index : s) {
+                            content.append(index).append(",");
+                        }
+                        LogUtils.e("rxJavaBuffer==" + content);
+                    }
+                });
+        subject.onNext("1");
+        subject.onNext("2");
+        subject.onNext("3");
+        subject.onNext("4");
+        subject.onNext("5");
+        subject.onNext("6");
+        subject.onNext("7");
+        subject.onNext("8");
+        subject.onNext("9");
+        subject.onNext("10");
+//        subject.onComplete();
+    }
+
+    public static void getOKHttp() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+                Request request = new Request.Builder().url("http://gank.io/api/today").build();
+                Call call = okHttpClient.newCall(request);
+                Response response = call.execute();
+                if (response.body() != null) {
+                    e.onNext(response.body().string());
+                    e.onComplete();
+                }
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String response) {
+                LogUtils.e("onNext" + response);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.e("onError" + e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.e("onComplete");
+            }
+        });
+    }
 
     private static Observable<Integer> makeRequest(String query) {
         return Observable.just(query)

@@ -1,14 +1,17 @@
 package com.example.administrator.myapplication.base;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.blankj.utilcode.util.AdaptScreenUtils;
+import com.example.administrator.myapplication.activity.ViewInterface;
 import com.gyf.barlibrary.ImmersionBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import io.reactivex.disposables.Disposable;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements ViewInterface {
 
 
     @Override
@@ -27,4 +30,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         ImmersionBar.with(this).destroy();
         super.onDestroy();
     }
+
+    @Override
+    public void onNext(View view) {
+        onFragmentViewCreated(view);
+    }
+
+    protected void onFragmentViewCreated(View view) {
+        
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+
 }

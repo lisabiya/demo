@@ -3,7 +3,6 @@ package com.example.administrator.myapplication.fragment
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Pair
 import android.view.LayoutInflater
@@ -34,6 +33,10 @@ class UserCenterFragment : BaseFragment() {
         fun myOrder()
 
         fun myPurse(activity: Activity?)
+
+        fun set()
+
+        fun record()
     }
 
     private lateinit var userCenterListener: UserCenterListener
@@ -52,6 +55,7 @@ class UserCenterFragment : BaseFragment() {
         initData()
     }
 
+
     override fun initView() {
         rlSystemInformation.setOnClickListener {
             userCenterListener.sysTem(getFragmentManager())
@@ -62,15 +66,18 @@ class UserCenterFragment : BaseFragment() {
         rlMyOrder.setOnClickListener {
             userCenterListener.myOrder()
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        }
-
         rlMyPurse.setOnClickListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 val compat = ActivityOptions.makeSceneTransitionAnimation(activity, Pair(rlMyPurse, "rlMyPurse"))
                 activity!!.startActivity(Intent(activity, MyPurseActivity::class.java), compat.toBundle())
             }
 //            userCenterListener.myPurse(activity)
+        }
+        rlSetting.setOnClickListener {
+            userCenterListener.set()
+        }
+        rlRecord.setOnClickListener {
+            userCenterListener.record()
         }
     }
 
@@ -79,8 +86,13 @@ class UserCenterFragment : BaseFragment() {
         userCenterListener.getUsers().observe(this, Observer { user ->
             tvName.text = user.name
         })
-
     }
 
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            onViewShow()
+        }
+    }
 }

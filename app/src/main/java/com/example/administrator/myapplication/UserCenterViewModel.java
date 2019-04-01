@@ -58,7 +58,7 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     @Override
     public void sysTem(FragmentManager fragmentManager) {
         loadUsers(new User("sysTem"));
-        RouteQueryUtil.rxJava5();
+        RouteQueryUtil.getOKHttp();
         showSimplePop(fragmentManager);
     }
 
@@ -86,5 +86,16 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
             activity.startActivity(new Intent(activity, MyPurseActivity.class), compat.toBundle());
         }
         loadUsers(new User("myPurse"));
+    }
+
+    @Override
+    public void set() {
+        loadUsers(new User("set"));
+        RouteQueryUtil.rxJavaBuffer();
+    }
+
+    @Override
+    public void record() {
+        loadUsers(new User("record"));
     }
 }

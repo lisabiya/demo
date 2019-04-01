@@ -15,5 +15,6 @@
     <string name="map">地图</string>
     <string name="message">消息</string>
     <string name="home_page">主页</string>
+    <string name="ok">好的</string>
 
 </resources>
