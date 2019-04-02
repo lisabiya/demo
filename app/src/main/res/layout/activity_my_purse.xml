@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SceneRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -163,6 +164,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rlSetting"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="4dp"
@@ -194,6 +196,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rlRecord"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="4dp"

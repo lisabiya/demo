@@ -1,6 +1,8 @@
 package com.example.administrator.myapplication.activity
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.map.MapViewManager
@@ -8,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_my_order.*
 
 class MyOrderActivity : BaseActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_order)
@@ -28,4 +31,5 @@ class MyOrderActivity : BaseActivity() {
         val manager = MapViewManager(aMap)
         lifecycle.addObserver(manager)
     }
+
 }

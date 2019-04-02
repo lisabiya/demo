@@ -21,6 +21,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
+import io.reactivex.observables.GroupedObservable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import okhttp3.Call;
@@ -141,7 +142,6 @@ public class RouteQueryUtil {
         }).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -307,18 +307,6 @@ public class RouteQueryUtil {
     public static void rxJavaBuffer() {
         PublishSubject<String> subject = PublishSubject.create();
         Disposable disposable = subject
-                .compose(new ObservableTransformer<String, String>() {
-                    @Override
-                    public ObservableSource<String> apply(Observable<String> upstream) {
-                        return upstream.filter(new Predicate<String>() {
-                            @Override
-                            public boolean test(String s) throws Exception {
-                                LogUtils.e("ObservableTransformer==" + s);
-                                return Integer.valueOf(s) != 6;
-                            }
-                        });
-                    }
-                })
                 .buffer(3)
                 .subscribe(new Consumer<List<String>>() {
                     @Override
@@ -340,7 +328,77 @@ public class RouteQueryUtil {
         subject.onNext("8");
         subject.onNext("9");
         subject.onNext("10");
-//        subject.onComplete();
+        subject.onComplete();
+    }
+
+    public static void rxJavaGroupBy() {
+        PublishSubject<String> subject = PublishSubject.create();
+        Disposable disposable = subject
+                .groupBy(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        if (Integer.valueOf(s) < 4) {
+                            return "one";
+                        } else if (Integer.valueOf(s) < 7) {
+                            return "two";
+                        }
+                        if (Integer.valueOf(s) < 10) {
+                            return "three";
+                        }
+                        return "other";
+                    }
+                })
+                .subscribe(new Consumer<GroupedObservable<String, String>>() {
+                    @Override
+                    public void accept(GroupedObservable<String, String> sub) throws Exception {
+                        LogUtils.e(sub.getKey());
+                        switch (sub.getKey()) {
+                            case "one":
+                                sub.subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        LogUtils.e("GroupedObservable==one" + s);
+                                    }
+                                });
+                                break;
+                            case "two":
+                                sub.subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        LogUtils.e("GroupedObservable==two" + s);
+                                    }
+                                });
+                                break;
+                            case "three":
+                                sub.subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        LogUtils.e("GroupedObservable==three" + s);
+                                    }
+                                });
+                                break;
+                            default:
+                                sub.subscribe(new Consumer<String>() {
+                                    @Override
+                                    public void accept(String s) throws Exception {
+                                        LogUtils.e("GroupedObservable==other" + s);
+                                    }
+                                });
+                                break;
+                        }
+                    }
+                });
+        subject.onNext("1");
+        subject.onNext("2");
+        subject.onNext("3");
+        subject.onNext("4");
+        subject.onNext("5");
+        subject.onNext("6");
+        subject.onNext("7");
+        subject.onNext("8");
+        subject.onNext("9");
+        subject.onNext("10");
+        subject.onComplete();
     }
 
     public static void getOKHttp() {

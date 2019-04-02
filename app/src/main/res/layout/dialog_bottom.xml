@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -7,8 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_corner_orange"
         android:gravity="center"
         android:paddingStart="120dp">
 
@@ -16,16 +20,18 @@
             android:id="@+id/btOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner_orange"
+            android:background="@drawable/border_shadow"
             android:text="@string/ok"
-            android:textColor="@color/white"
+            android:textColor="@color/txt_black"
             android:textSize="26dp" />
 
     </LinearLayout>
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/roundView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="20dp"
-        android:src="@mipmap/forgotme" />
+        app:roundAsCircle="true" />
+
 </RelativeLayout>

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseFragment
+import com.example.administrator.myapplication.utils.AnimationUtil
+import com.facebook.drawee.view.SimpleDraweeView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_empty.*
 
@@ -47,10 +49,12 @@ class EmptyFragment : BaseFragment() {
         dialogView.findViewById<Button>(R.id.btOk).setOnClickListener {
             bottomSheetDialog.dismiss()
         }
+        dialogView.findViewById<SimpleDraweeView>(R.id.roundView).setActualImageResource(R.mipmap.forgotme)
         bottomSheetDialog.setContentView(dialogView);
         (dialogView.parent as View).setBackgroundColor(Color.TRANSPARENT);
         //给布局设置透明背景色
         bottomSheetDialog.show();
+        AnimationUtil.doAnimation(dialogView, AnimationUtil.AnimationType.ROTATION);
     }
 
 }

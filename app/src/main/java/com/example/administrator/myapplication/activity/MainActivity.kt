@@ -3,28 +3,26 @@ package com.example.administrator.myapplication.activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.transition.*
+import android.transition.Explode
+import android.transition.Scene
+import android.transition.Slide
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
-import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.FragmentUtils
-import com.blankj.utilcode.util.LogUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.fragment.EmptyFragment
 import com.example.administrator.myapplication.fragment.OrderFragment
 import com.example.administrator.myapplication.fragment.UserCenterFragment
+import com.example.administrator.myapplication.utils.AnimationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
 
     override fun onFragmentViewCreated(view: View?) {
-        LogUtils.e("view" + view.toString())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            TransitionManager.beginDelayedTransition(fragmentContainer, Fade())
-        }
+        AnimationUtil.doAnimation(view, AnimationUtil.AnimationType.PRESS)
     }
 
 
@@ -76,7 +74,9 @@ class MainActivity : BaseActivity() {
         }
 
         btGetOrder.setOnClickListener {
-            ActivityUtils.startActivity(MyOrderActivity::class.java)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(Intent(this, MyOrderActivity::class.java))
+            }
         }
 
     }

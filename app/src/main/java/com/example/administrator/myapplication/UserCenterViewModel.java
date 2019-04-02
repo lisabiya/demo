@@ -97,5 +97,6 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     @Override
     public void record() {
         loadUsers(new User("record"));
+        RouteQueryUtil.rxJavaGroupBy();
     }
 }
