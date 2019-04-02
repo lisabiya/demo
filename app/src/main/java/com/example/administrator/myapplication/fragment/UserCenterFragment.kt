@@ -58,7 +58,7 @@ class UserCenterFragment : BaseFragment() {
 
     override fun initView() {
         rlSystemInformation.setOnClickListener {
-            userCenterListener.sysTem(getFragmentManager())
+            userCenterListener.sysTem(fragmentManager)
         }
         rlVerified.setOnClickListener {
             userCenterListener.verified()

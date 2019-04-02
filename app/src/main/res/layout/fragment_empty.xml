@@ -16,7 +16,8 @@
             android:layout_centerInParent="true"
             android:text="@string/message"
             android:textColor="@color/white"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:transitionName="TransTitle" />
 
     </RelativeLayout>
 

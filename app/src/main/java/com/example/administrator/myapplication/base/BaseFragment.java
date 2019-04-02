@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -18,7 +17,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected View rootView = null;
 
-    public FragmentManager fragmentManager = null;
 
     private ObservableEmitter<View> emitter;
 

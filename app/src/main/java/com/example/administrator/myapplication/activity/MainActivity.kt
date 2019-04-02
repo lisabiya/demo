@@ -3,8 +3,8 @@ package com.example.administrator.myapplication.activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.transition.Explode
-import android.transition.Scene
+import android.transition.*
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import com.blankj.utilcode.util.ActivityUtils
@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
     override fun onFragmentViewCreated(view: View?) {
         LogUtils.e("view" + view.toString())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            TransitionManager.go(Scene(fragmentContainer, view))
+            TransitionManager.beginDelayedTransition(fragmentContainer, Fade())
         }
     }
 
@@ -46,6 +46,10 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         llOrder.setOnClickListener {
+            key++;
+            if (emptyFragment.isVisible) {
+                return@setOnClickListener
+            }
             resetSelect()
             selectEmpty()
         }
@@ -54,12 +58,19 @@ class MainActivity : BaseActivity() {
                 key = 0;
                 return@setOnLongClickListener true
             }
+            if (orderFragment.isVisible) {
+                return@setOnLongClickListener true
+            }
             resetSelect()
             selectOrder()
             return@setOnLongClickListener true
         }
 
         llUserCenter.setOnClickListener {
+            key = 0;
+            if (userCenterFragment.isVisible) {
+                return@setOnClickListener
+            }
             resetSelect()
             selectUserCenter()
         }
@@ -84,10 +95,11 @@ class MainActivity : BaseActivity() {
 
     //选择空
     private fun selectEmpty() {
-        key++;
         ivOrder.setImageResource(R.mipmap.ic_home)
         tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            emptyFragment.enterTransition = Slide(Gravity.START)
+        };
         FragmentUtils.show(emptyFragment)
     }
 
@@ -100,9 +112,11 @@ class MainActivity : BaseActivity() {
 
     //选择个人中心
     private fun selectUserCenter() {
-        key = 0;
         ivUserCenter.setImageResource(R.mipmap.ic_user)
         tvUserCenter.setTextColor(resources.getColor(R.color.colorPrimary))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            userCenterFragment.enterTransition = Explode()
+        };
         FragmentUtils.show(userCenterFragment)
     }
 
@@ -110,7 +124,6 @@ class MainActivity : BaseActivity() {
     private fun resetSelect() {
         ivOrder.setImageResource(R.mipmap.ic_home)
         tvOrder.setTextColor(resources.getColor(R.color.txt_gray))
-
         ivUserCenter.setImageResource(R.mipmap.ic_user)
         tvUserCenter.setTextColor(resources.getColor(R.color.txt_gray))
 
