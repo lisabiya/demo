@@ -64,7 +64,7 @@ class MyPurseActivity : BaseActivity(), View.OnClickListener {
 
     private fun changeScene(view: View?) {
         changeSize(view)
-        view!!.visibility = View.VISIBLE
+        view?.visibility = View.VISIBLE
     }
 
     private var primarySize = ConvertUtils.dp2px(46f);

@@ -17,6 +17,7 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Function4;
@@ -400,6 +401,39 @@ public class RouteQueryUtil {
         subject.onNext("10");
         subject.onComplete();
     }
+
+    /**
+     * 可以实现类似累加器工作流程，
+     * 自定义BiFunction，比较s,s1,然后返回值
+     * 下一次的s即为上一次的返回值，s2为新的onNext 发送的元素
+     * 第一次发送数据不进BiFunction，直接进accept
+     */
+    public static void rxJavaSCan() {
+        PublishSubject<Integer> subject = PublishSubject.create();
+        Disposable disposable = subject
+                .scan(new BiFunction<Integer, Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer s, Integer s2) throws Exception {
+                        LogUtils.e("apply s=" + s + "apply s2=" + s2);
+                        return s > s2 ? s : s2;
+                    }
+                }).subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer s) throws Exception {
+                        LogUtils.e("scan=" + s);
+                    }
+                });
+        subject.onNext(1);
+        subject.onNext(2);
+        subject.onNext(3);
+        subject.onNext(4);
+        subject.onNext(5);
+        subject.onNext(6);
+        subject.onNext(7);
+        subject.onNext(8);
+        subject.onComplete();
+    }
+
 
     public static void getOKHttp() {
         Observable.create(new ObservableOnSubscribe<String>() {

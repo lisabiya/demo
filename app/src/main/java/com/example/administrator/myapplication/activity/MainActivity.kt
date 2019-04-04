@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.transition.Explode
-import android.transition.Scene
 import android.transition.Slide
 import android.view.Gravity
 import android.view.KeyEvent
@@ -31,8 +30,6 @@ class MainActivity : BaseActivity() {
     private val emptyFragment = EmptyFragment()
     private var key = 0;
 
-    lateinit var scene1: Scene
-    lateinit var scene2: Scene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
