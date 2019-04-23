@@ -1,18 +1,21 @@
 package com.example.administrator.myapplication;
 
 import com.blankj.utilcode.util.GsonUtils;
-import com.example.administrator.myapplication.base.BaseApplication;
 import com.example.administrator.myapplication.bean.Happiness;
 import com.example.administrator.myapplication.bean.Info;
 import com.example.administrator.myapplication.fragment.OrderFragment;
 import com.example.administrator.myapplication.net.HttpRequest;
-import com.example.administrator.myapplication.net.rxjava.SimpleSubscriber;
+import com.example.administrator.myapplication.net.core.callback.BaseResponse;
+import com.example.administrator.myapplication.net.core.callback.DisposableManager;
+import com.example.administrator.myapplication.net.core.callback.HttpCallback;
+import com.example.administrator.myapplication.net.core.callback.SimpleCallback;
 
 import org.jetbrains.annotations.NotNull;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import io.reactivex.disposables.Disposable;
 
 public class OrderViewModel extends ViewModel implements OrderFragment.OrderListener {
     private MutableLiveData<Info> mInfo;
@@ -25,6 +28,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     @Override
     protected void onCleared() {
+        DisposableManager.removeTag("TAG");
         super.onCleared();
     }
 
@@ -57,7 +61,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     //获取每日推荐
     private void getInfoWeb() {
-        HttpRequest.getInfo(new SimpleSubscriber<String>(BaseApplication.getInstance()) {
+        HttpRequest.getInfo(new SimpleCallback<String>() {
             @Override
             public void onNext(String s) {
                 super.onNext(s);
@@ -65,6 +69,11 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
                 if (mInfo != null) {
                     mInfo.postValue(info);
                 }
+            }
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                super.onSubscribe(d);
             }
 
             @Override
@@ -77,7 +86,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     //获取每日推荐
     private void getHappinessWeb() {
-        HttpRequest.getHappiness(new SimpleSubscriber<String>(BaseApplication.getInstance()) {
+        HttpRequest.getHappiness(new SimpleCallback<String>() {
             @Override
             public void onNext(String s) {
                 super.onNext(s);
@@ -88,10 +97,30 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
             }
 
             @Override
+            public void onSubscribe(Disposable d) {
+                super.onSubscribe(d);
+            }
+
+            @Override
             public void onComplete() {
                 super.onComplete();
             }
         });
     }
 
+
+    private void getList() {
+        HttpRequest.loginUser("", "", new HttpCallback<String>("TAG") {
+
+            @Override
+            public void onSuccess(BaseResponse response, String s) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
 }

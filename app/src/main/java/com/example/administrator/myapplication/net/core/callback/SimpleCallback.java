@@ -1,8 +1,7 @@
-package com.example.administrator.myapplication.net.rxjava;
+package com.example.administrator.myapplication.net.core.callback;
 
 
-import android.content.Context;
-
+import android.text.TextUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -11,14 +10,16 @@ import io.reactivex.disposables.Disposable;
 /**
  * 通用订阅者,用于统一处理回调
  */
-public class SimpleSubscriber<T> implements Observer<T> {
+public class SimpleCallback<T> implements Observer<T> {
 
-    private Context context;
+    private String tag;
 
-    public SimpleSubscriber(Context context) {
-        this.context = context;
+    protected SimpleCallback() {
     }
 
+    public SimpleCallback(String tag) {
+        this.tag = tag;
+    }
 
     @Override
     public void onError(Throwable throwable) {
@@ -36,12 +37,13 @@ public class SimpleSubscriber<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
-
+        if (!TextUtils.isEmpty(tag)) {
+            DisposableManager.addDisposable(tag, d);
+        }
     }
 
     @Override
     public void onNext(T t) {
-        // sub
         onComplete();
     }
 

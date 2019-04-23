@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication.net;
+package com.example.administrator.myapplication.net.core.callback;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -6,8 +6,8 @@ import java.util.List;
 
 public class BaseResponse<T> {
 
-    public static final int RESULT_SUCCESS = 1;
-    public static final int RESULTCODE_SUCCESS = 200;
+    private static final int RESULT_SUCCESS = 1;
+    private static final int RESULT_CODE_SUCCESS = 200;
     private int code;
     private int status;
     private String msg;
@@ -50,7 +50,7 @@ public class BaseResponse<T> {
     }
 
     public boolean isSuccess() {
-        return status == RESULT_SUCCESS || code == RESULTCODE_SUCCESS;
+        return status == RESULT_SUCCESS || code == RESULT_CODE_SUCCESS;
     }
 
     public T getObject() {

@@ -55,7 +55,10 @@
         </activity>
 
         <activity android:name=".activity.SystemInfoActivity" />
-        <activity android:name=".activity.MyOrderActivity" />
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:launchMode="singleTask" />
+        
         <activity android:name=".activity.MyPurseActivity" />
 
         <!--oppo推送-->
@@ -69,7 +72,7 @@
 
 
         <meta-data
-             android:name="UPA_MPA_CHANNELID"
+            android:name="UPA_MPA_CHANNELID"
             android:value="01382jUzAZv">
 
         </meta-data>

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.utils.AnimationUtil
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +17,7 @@ class RxPopupFragment : DialogFragment() {
 
 
     private val asyncSubject = AsyncSubject.create<View>()
+    private var isLive = true;//判断是否可用
 
     companion object {
         private var resourceId = 0;
@@ -32,12 +32,15 @@ class RxPopupFragment : DialogFragment() {
         asyncSubject
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(AndroidSchedulers.mainThread())
+                .takeWhile {
+                    return@takeWhile isLive
+                }
                 .subscribe(observer)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return inflater.inflate(R.layout.fragment_dialog, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return inflater.inflate(resourceId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,6 +60,7 @@ class RxPopupFragment : DialogFragment() {
     }
 
     override fun onDestroy() {
+        isLive = false
         super.onDestroy()
     }
 

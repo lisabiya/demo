@@ -10,6 +10,7 @@ import java.lang.reflect.Proxy
 
 
 fun showSimplePop(fragmentManager: FragmentManager?) {
+    if (fragmentManager == null) return
     val rxPopup = object : RxPopup() {
         override fun onViewCreated(view: View) {
             setCancelable(true)
@@ -23,9 +24,7 @@ fun showSimplePop(fragmentManager: FragmentManager?) {
 
         }
     }
-
-    if (fragmentManager != null)
-        rxPopup.showFragment(fragmentManager, R.layout.fragment_dialog)
+    rxPopup.showFragment(fragmentManager, R.layout.fragment_dialog)
 }
 
 interface Subject {

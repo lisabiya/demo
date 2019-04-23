@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.example.administrator.myapplication.net.BaseResponse;
+import com.example.administrator.myapplication.net.core.callback.BaseResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,8 +64,7 @@ public class JsonUtil {
     public static <T> List<T> jsonToList(String json, final Class<T> cls) {
         try {
             if (!TextUtils.isEmpty(json.trim())) {
-                List<T> res = JSON.parseArray(json, cls);
-                return res;
+                return JSON.parseArray(json, cls);
             }
         } catch (Exception e) {
             e.printStackTrace();
