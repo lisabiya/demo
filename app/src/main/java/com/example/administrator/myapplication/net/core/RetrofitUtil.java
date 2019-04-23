@@ -3,7 +3,6 @@ package com.example.administrator.myapplication.net.core;
 import android.os.AsyncTask;
 
 import com.example.administrator.myapplication.base.BaseApplication;
-import com.example.administrator.myapplication.net.Apis;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +21,9 @@ public class RetrofitUtil {
     private static Retrofit retrofit;
 
     private static OkHttpClient httpClient;
+
+    public static final String BASE_URL = "http://222.85.161.222:8081/mapapi/";
+
 
     public static OkHttpClient getHttpClient() {
         return httpClient;
@@ -45,7 +47,7 @@ public class RetrofitUtil {
 
         // Retrofit
         retrofit = new Retrofit.Builder()
-                .baseUrl(Apis.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create()) // gson
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // rxjava 响应式编程
                 .client(httpClient)
@@ -55,6 +57,16 @@ public class RetrofitUtil {
 
 
     public static <T> T getApiService(Class<T> tClass) {
+        return retrofit.create(tClass);
+    }
+
+    private static void changeBaseUrl(String baseUrl) {
+        retrofit = retrofit.newBuilder().baseUrl(baseUrl).build();
+    }
+
+    //替换默认URL
+    public static <T> T getApiService(Class<T> tClass, String baseUrl) {
+        changeBaseUrl(baseUrl);
         return retrofit.create(tClass);
     }
 }

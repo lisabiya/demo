@@ -51,8 +51,8 @@ fun main() {
 
     val subject1 = ProxyFactory(realSubject).proxyInstance as Subject;
     //执行方法
-    subject1.hello("kitty")
-    subject1.bye();
+    System.out.println("hello return=${subject1.hello("kitty")}");
+    System.out.println("bye return=${subject1.bye()}");
 }
 
 /**

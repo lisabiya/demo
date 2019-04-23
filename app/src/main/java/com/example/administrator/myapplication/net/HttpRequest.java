@@ -2,10 +2,12 @@ package com.example.administrator.myapplication.net;
 
 
 import android.content.Context;
+import android.os.Build;
 
 import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.base.BaseApplication;
 import com.example.administrator.myapplication.bean.User;
+import com.example.administrator.myapplication.net.core.RetrofitUtil;
 import com.example.administrator.myapplication.net.core.callback.HttpCallback;
 import com.example.administrator.myapplication.net.core.callback.ObservableDecorator;
 import com.example.administrator.myapplication.net.core.callback.SimpleCallback;
@@ -68,8 +70,13 @@ public class HttpRequest {
     }
 
     //获取List
-    public static void getList(SimpleCallback<List<User>> subscriber) {
-        Observable<String> observable = getApiService(ApiService.class).getInfo("");
+    public static void getExample(SimpleCallback<List<User>> subscriber) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("device_model", android.os.Build.MODEL);
+        params.put("device_name", Build.ID);
+        params.put("device_os_name", "android");
+        params.put("device_os_version", android.os.Build.VERSION.RELEASE);
+        Observable<String> observable = getApiService(ApiService.class).showExample(RetrofitUtil.BASE_URL, params);
         ObservableDecorator.decorateList(observable, User.class).subscribe(subscriber);
     }
 }
