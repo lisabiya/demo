@@ -29,6 +29,11 @@ public class DisposableManager {
         }
     }
 
+    public static synchronized void onDestroy() {
+        TagsMap.clear();
+    }
+
+
     static synchronized void addDisposable(String tag, Disposable disposable) {
         if (TagsMap.get(tag) == null) {
             TagsMap.put(tag, new ArrayList<Disposable>());

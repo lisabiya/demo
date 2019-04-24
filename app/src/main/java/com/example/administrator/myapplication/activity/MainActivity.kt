@@ -14,6 +14,7 @@ import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.fragment.EmptyFragment
 import com.example.administrator.myapplication.fragment.OrderFragment
 import com.example.administrator.myapplication.fragment.UserCenterFragment
+import com.example.administrator.myapplication.net.core.callback.DisposableManager
 import com.example.administrator.myapplication.utils.AnimationUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -141,6 +142,10 @@ class MainActivity : BaseActivity() {
         return super.onKeyDown(keyCode, event);
     }
 
+    override fun onDestroy() {
+        DisposableManager.onDestroy()
+        super.onDestroy()
+    }
 
     private fun initTransaction() {
         //设置进入与退出效果

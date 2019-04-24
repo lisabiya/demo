@@ -37,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewInte
     }
 
     protected void onFragmentViewCreated(View view) {
-        
+
     }
 
     @Override

@@ -15,12 +15,12 @@ import org.jetbrains.annotations.NotNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.disposables.Disposable;
 
 public class OrderViewModel extends ViewModel implements OrderFragment.OrderListener {
     private MutableLiveData<Info> mInfo;
     private MutableLiveData<Happiness> happiness;
 
+    private static final String TAG = "MyTAG";
 
     public OrderFragment.OrderListener getListener() {
         return this;
@@ -28,7 +28,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     @Override
     protected void onCleared() {
-        DisposableManager.removeTag("TAG");
+        DisposableManager.removeTag(TAG);
         super.onCleared();
     }
 
@@ -61,10 +61,9 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     //获取每日推荐
     private void getInfoWeb() {
-        HttpRequest.getInfo(new SimpleCallback<String>() {
+        HttpRequest.getInfo(new SimpleCallback<String>(TAG) {
             @Override
-            public void onNext(String s) {
-                super.onNext(s);
+            public void onSuccess(String s) {
                 Info info = GsonUtils.fromJson(s, Info.class);
                 if (mInfo != null) {
                     mInfo.postValue(info);
@@ -72,13 +71,12 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
             }
 
             @Override
-            public void onSubscribe(Disposable d) {
-                super.onSubscribe(d);
+            public void onFailed(int code, String message) {
             }
 
             @Override
-            public void onComplete() {
-                super.onComplete();
+            public void onFinish() {
+                super.onFinish();
             }
         });
     }
@@ -86,9 +84,9 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
     //获取每日推荐
     private void getHappinessWeb() {
-        HttpRequest.getHappiness(new SimpleCallback<String>() {
+        HttpRequest.getHappiness(new SimpleCallback<String>(TAG) {
             @Override
-            public void onNext(String s) {
+            public void onSuccess(String s) {
                 super.onNext(s);
                 Happiness info = GsonUtils.fromJson(s, Happiness.class);
                 if (happiness != null) {
@@ -97,15 +95,15 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
             }
 
             @Override
-            public void onSubscribe(Disposable d) {
-                super.onSubscribe(d);
+            public void onFailed(int code, String message) {
             }
 
             @Override
-            public void onComplete() {
-                super.onComplete();
+            public void onFinish() {
+                super.onFinish();
             }
         });
+        getList();
     }
 
 
@@ -114,7 +112,10 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
             @Override
             public void onSuccess(BaseResponse response, String s) {
+            }
 
+            @Override
+            public void onFailed(int code, String message) {
             }
 
             @Override

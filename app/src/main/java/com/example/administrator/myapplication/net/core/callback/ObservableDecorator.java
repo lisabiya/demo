@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
@@ -28,8 +27,7 @@ public class ObservableDecorator {
     public static <T> Observable<T> decorate(Observable<T> observable) {
         return observable
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .delay(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread()); // FIXME 模拟延迟,用于观察加载框等效果
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**
