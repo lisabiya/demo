@@ -3,6 +3,9 @@ package com.example.administrator.myapplication.adapter;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.myapplication.R;
@@ -15,9 +18,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 
 import java.util.List;
-
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class InfoAdapter extends BaseQuickAdapter<Happiness.ResultsBean, BaseViewHolder> {
 

@@ -11,6 +11,7 @@ import com.example.administrator.myapplication.net.core.RetrofitUtil;
 import com.example.administrator.myapplication.net.core.callback.HttpCallback;
 import com.example.administrator.myapplication.net.core.callback.ObservableDecorator;
 import com.example.administrator.myapplication.net.core.callback.SimpleCallback;
+import com.example.administrator.myapplication.net.core.callback.SimpleLifeCycleCallback;
 import com.example.administrator.myapplication.utils.HYAppUtils;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import static com.example.administrator.myapplication.net.core.RetrofitUtil.getA
 
 
 /**
+ *
  */
 
 public class HttpRequest {
@@ -64,6 +66,12 @@ public class HttpRequest {
      * 获取实体类 已解析
      */
     public static void getHappiness(SimpleCallback<String> subscriber) {
+        Observable<String> observable = getApiService(ApiService.class).getInfo(String.format(Locale.CHINA,
+                "http://gank.io/api/data/%%E7%%A6%%8F%%E5%%88%%A9/%d/%d", 200, 1));
+        ObservableDecorator.decorateEntity(observable, String.class).subscribe(subscriber);
+    }
+
+    public static void getHappiness(SimpleLifeCycleCallback<String> subscriber) {
         Observable<String> observable = getApiService(ApiService.class).getInfo(String.format(Locale.CHINA,
                 "http://gank.io/api/data/%%E7%%A6%%8F%%E5%%88%%A9/%d/%d", 200, 1));
         ObservableDecorator.decorateEntity(observable, String.class).subscribe(subscriber);

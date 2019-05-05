@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.administrator.myapplication.OrderViewModel
 import com.example.administrator.myapplication.R
-import com.example.administrator.myapplication.adapter.InfoAdapter
+import com.example.administrator.myapplication.adapter.InfoAdapter_kt
 import com.example.administrator.myapplication.base.BaseFragment
 import com.example.administrator.myapplication.bean.Happiness
 import com.example.administrator.myapplication.bean.Info
@@ -52,12 +52,12 @@ class OrderFragment : BaseFragment() {
             val list = ArrayList<Happiness.ResultsBean>()
             list.addAll(happiness.results)
             if (rvList.adapter == null) {
-                val adapter = InfoAdapter(list)
+                val adapter = InfoAdapter_kt(list)
                 rvList.adapter = adapter
             } else {
-                (rvList.adapter as InfoAdapter).data.clear()
-                (rvList.adapter as InfoAdapter).data.addAll(list)
-                (rvList.adapter as InfoAdapter).notifyDataSetChanged()
+                (rvList.adapter as InfoAdapter_kt).data.clear()
+                (rvList.adapter as InfoAdapter_kt).data.addAll(list)
+                (rvList.adapter as InfoAdapter_kt).notifyDataSetChanged()
             }
         })
 

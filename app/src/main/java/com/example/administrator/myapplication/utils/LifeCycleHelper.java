@@ -12,6 +12,10 @@ import androidx.lifecycle.OnLifecycleEvent;
  */
 public class LifeCycleHelper implements LifecycleObserver {
 
+    public LifeCycleHelper(Lifecycle lifecycle) {
+        lifecycle.addObserver(this);
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private void onCreate() {
         Log.e("LifeCycleHelper", "onCreate");

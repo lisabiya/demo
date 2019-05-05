@@ -1,5 +1,9 @@
 package com.example.administrator.myapplication;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import com.blankj.utilcode.util.GsonUtils;
 import com.example.administrator.myapplication.bean.Happiness;
 import com.example.administrator.myapplication.bean.Info;
@@ -11,10 +15,6 @@ import com.example.administrator.myapplication.net.core.callback.HttpCallback;
 import com.example.administrator.myapplication.net.core.callback.SimpleCallback;
 
 import org.jetbrains.annotations.NotNull;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 public class OrderViewModel extends ViewModel implements OrderFragment.OrderListener {
     private MutableLiveData<Info> mInfo;
