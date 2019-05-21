@@ -16,21 +16,66 @@
             android:layout_centerInParent="true"
             android:text="@string/message"
             android:textColor="@color/white"
-            android:textSize="18dp"
-            android:transitionName="TransTitle" />
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="160dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="qt.json"
+        app:lottie_loop="true" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bt2"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_corner_orange"
+        android:text="@string/demo1"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_corner_orange"
+        android:text="@string/demo2"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btGetOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/shape_corner_orange"
-        android:padding="16dp"
-        android:text="@string/order"
+        android:text="@string/show"
         android:textColor="@color/white"
-        android:textSize="36sp" />
+        android:textSize="16sp" />
 
+    <Button
+        android:id="@+id/btNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_corner_orange"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 </RelativeLayout>

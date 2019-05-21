@@ -54,13 +54,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.SystemInfoActivity" />
+        <activity
+            android:name=".activity.SystemInfoActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.MyOrderActivity"
             android:launchMode="singleTask" />
-        
-        <activity android:name=".activity.MyPurseActivity" />
 
+        <activity android:name=".activity.MyPurseActivity" />
+        <activity
+            android:name=".activity.PhotoViewActivity"
+            android:launchMode="singleTop" />
         <!--oppo推送-->
         <service
             android:name="com.coloros.mcssdk.PushService"

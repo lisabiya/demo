@@ -27,9 +27,21 @@ class EmptyFragment : BaseFragment() {
         initData()
     }
 
+    var currentFrame = 0;
+
     override fun initView() {
         btGetOrder.setOnClickListener {
-            initDialog()
+            //            initDialog()
+            lottie.playAnimation()
+        }
+        bt1.setOnClickListener {
+            lottie.setAnimation("data.json");
+        }
+        bt2.setOnClickListener {
+            lottie.setAnimation("qt.json");
+        }
+        btNext.setOnClickListener {
+            lottie.frame = currentFrame++;
         }
     }
 

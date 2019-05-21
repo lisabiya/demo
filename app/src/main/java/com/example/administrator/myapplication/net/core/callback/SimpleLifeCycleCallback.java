@@ -20,7 +20,7 @@ public abstract class SimpleLifeCycleCallback<T> implements Observer<T>, Lifecyc
     /**
      * @param lifecycle 生命周期
      */
-    public SimpleLifeCycleCallback(Lifecycle lifecycle) {
+    protected SimpleLifeCycleCallback(Lifecycle lifecycle) {
         lifecycle.addObserver(this);
     }
 
@@ -53,7 +53,7 @@ public abstract class SimpleLifeCycleCallback<T> implements Observer<T>, Lifecyc
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private void onDestroy() {
-        if (disposable != null) disposable.dispose();
+        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
     }
 
 
@@ -63,7 +63,7 @@ public abstract class SimpleLifeCycleCallback<T> implements Observer<T>, Lifecyc
     public abstract void onFailed(int code, String message);
 
     public void onFinish() {
-
+        onDestroy();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.administrator.myapplication;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,6 +14,7 @@ import com.example.administrator.myapplication.net.core.callback.BaseResponse;
 import com.example.administrator.myapplication.net.core.callback.DisposableManager;
 import com.example.administrator.myapplication.net.core.callback.HttpCallback;
 import com.example.administrator.myapplication.net.core.callback.SimpleCallback;
+import com.example.administrator.myapplication.net.core.callback.SimpleLifeCycleCallback;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -54,6 +56,13 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
         return happiness;
     }
 
+    public LiveData<Happiness> getHappiness(int page, Lifecycle lifecycle) {
+        if (happiness == null) {
+            happiness = new MutableLiveData<>();
+        }
+        return happiness;
+    }
+
     @Override
     public void onRefresh() {
         getHappinessWeb();
@@ -72,6 +81,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
             @Override
             public void onFailed(int code, String message) {
+                mInfo.postValue(null);
             }
 
             @Override
@@ -87,7 +97,29 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
         HttpRequest.getHappiness(new SimpleCallback<String>(TAG) {
             @Override
             public void onSuccess(String s) {
-                super.onNext(s);
+                Happiness info = GsonUtils.fromJson(s, Happiness.class);
+                if (happiness != null) {
+                    happiness.postValue(info);
+                }
+            }
+
+            @Override
+            public void onFailed(int code, String message) {
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+            }
+        });
+        getList();
+    }
+
+    //获取每日推荐
+    public void getHappinessWeb(int page, Lifecycle lifecycle) {
+        HttpRequest.getHappiness(page, new SimpleLifeCycleCallback<String>(lifecycle) {
+            @Override
+            public void onSuccess(String s) {
                 Happiness info = GsonUtils.fromJson(s, Happiness.class);
                 if (happiness != null) {
                     happiness.postValue(info);

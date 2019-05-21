@@ -16,5 +16,9 @@
     <string name="message">消息</string>
     <string name="home_page">主页</string>
     <string name="ok">好的</string>
+    <string name="demo1">demo1</string>
+    <string name="demo2">demo2</string>
+    <string name="show">show</string>
+    <string name="next">下一帧</string>
 
 </resources>

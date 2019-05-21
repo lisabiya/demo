@@ -37,6 +37,8 @@ class UserCenterFragment : BaseFragment() {
         fun set()
 
         fun record()
+
+        fun record(activity: Activity?)
     }
 
     private lateinit var userCenterListener: UserCenterListener
@@ -78,6 +80,10 @@ class UserCenterFragment : BaseFragment() {
         }
         rlRecord.setOnClickListener {
             userCenterListener.record()
+        }
+        rlRecord.setOnLongClickListener {
+            userCenterListener.record(activity)
+            return@setOnLongClickListener false
         }
     }
 

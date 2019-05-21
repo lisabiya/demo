@@ -4,7 +4,13 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import com.example.administrator.myapplication.activity.MyPurseActivity;
+import com.example.administrator.myapplication.activity.SystemInfoActivity;
 import com.example.administrator.myapplication.bean.User;
 import com.example.administrator.myapplication.fragment.UserCenterFragment;
 import com.example.administrator.myapplication.map.RouteQueryUtil;
@@ -13,10 +19,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -97,6 +99,12 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     @Override
     public void record() {
         loadUsers(new User("record"));
-        RouteQueryUtil.rxJavaSCan();
     }
+
+    @Override
+    public void record(Activity activity) {
+        activity.startActivity(new Intent(activity, SystemInfoActivity.class));
+    }
+
+
 }

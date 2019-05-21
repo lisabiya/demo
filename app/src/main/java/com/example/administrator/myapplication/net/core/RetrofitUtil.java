@@ -41,6 +41,7 @@ public class RetrofitUtil {
                 .cache(cache)
                 // 统一添加的Header
                 .addInterceptor(InterceptorFactory.getHeadInterceptor())
+                .addInterceptor(InterceptorFactory.getCommonLogInterceptor())
                 //LOG
                 .addInterceptor(logInterceptor)
                 .build();

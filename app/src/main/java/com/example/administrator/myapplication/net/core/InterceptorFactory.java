@@ -30,6 +30,10 @@ class InterceptorFactory {
         return getPersonHead();
     }
 
+    static Interceptor getCommonLogInterceptor() {
+        return new CommonLog();
+    }
+
     //添加自定义head
     private static Interceptor getPersonHead() {
         return new Interceptor() {
