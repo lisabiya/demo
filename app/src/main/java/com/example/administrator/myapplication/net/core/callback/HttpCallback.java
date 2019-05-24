@@ -31,7 +31,6 @@ public abstract class HttpCallback<T> implements Observer<BaseResponse<T>> {
     }
 
 
-
     @Override
     @SuppressWarnings("unchecked")
     public void onNext(BaseResponse<T> response) {

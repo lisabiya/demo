@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.administrator.myapplication.activity.MyPurseActivity;
-import com.example.administrator.myapplication.activity.SystemInfoActivity;
 import com.example.administrator.myapplication.bean.User;
 import com.example.administrator.myapplication.fragment.UserCenterFragment;
 import com.example.administrator.myapplication.map.RouteQueryUtil;
@@ -103,7 +102,7 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
 
     @Override
     public void record(Activity activity) {
-        activity.startActivity(new Intent(activity, SystemInfoActivity.class));
+//        activity.startActivity(new Intent(activity, SystemInfoActivity.class));
     }
 
 

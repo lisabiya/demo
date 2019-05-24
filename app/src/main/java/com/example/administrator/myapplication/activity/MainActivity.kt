@@ -50,6 +50,11 @@ class MainActivity : BaseActivity() {
             selectEmpty()
         }
         llOrder.setOnLongClickListener {
+            if (key == 6) {
+                key = 0;
+                startActivity(Intent(this, SystemInfoActivity::class.java))
+                return@setOnLongClickListener true
+            }
             if (key != 5) {
                 key = 0;
                 return@setOnLongClickListener true
