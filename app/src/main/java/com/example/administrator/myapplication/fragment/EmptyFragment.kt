@@ -35,10 +35,13 @@ class EmptyFragment : BaseFragment() {
             lottie.playAnimation()
         }
         bt1.setOnClickListener {
-            lottie.setAnimation("data.json");
+            lottie.setAnimation("test.json");
         }
         bt2.setOnClickListener {
-            lottie.setAnimation("qt.json");
+            lottie.setAnimation("high_five.json");
+        }
+        bt3.setOnClickListener {
+            lottie.setAnimation("page.json");
         }
         btNext.setOnClickListener {
             lottie.frame = currentFrame++;

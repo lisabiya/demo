@@ -55,6 +55,18 @@
         android:textSize="14sp" />
 
     <Button
+        android:id="@+id/bt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bt1"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape_corner_orange"
+        android:text="@string/demo3"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Button
         android:id="@+id/btGetOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

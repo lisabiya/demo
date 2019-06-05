@@ -19,9 +19,9 @@ class InfoAdapter_kt(data: List<Happiness.ResultsBean>)
         item?.run {
             helper?.setText(R.id.tvInfo, desc)
             val simpleDraweeView = helper?.getView<SimpleDraweeView>(R.id.ivImage)
-            if (item.url != null) {
-                setControllerListener(simpleDraweeView!!, item.url)
-            }
+//            if (item.url != null) {
+//                setControllerListener(simpleDraweeView!!, item.url)
+//            }
         }
     }
 

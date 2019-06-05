@@ -2,6 +2,8 @@ package com.example.administrator.myapplication.net.core.callback;
 
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import com.example.administrator.myapplication.utils.JsonUtil;
 
 import org.json.JSONArray;
@@ -10,8 +12,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
@@ -39,6 +41,7 @@ public class ObservableDecorator {
         return observable
                 .map(new SimpleFunction<>(cls))
                 .subscribeOn(Schedulers.io())
+                .delay(2000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
