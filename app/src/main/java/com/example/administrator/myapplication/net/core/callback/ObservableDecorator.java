@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,7 +40,6 @@ public class ObservableDecorator {
         return observable
                 .map(new SimpleFunction<>(cls))
                 .subscribeOn(Schedulers.io())
-                .delay(2000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 

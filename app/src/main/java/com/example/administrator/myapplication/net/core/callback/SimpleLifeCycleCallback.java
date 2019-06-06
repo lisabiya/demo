@@ -5,6 +5,9 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
+
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -22,6 +25,10 @@ public abstract class SimpleLifeCycleCallback<T> implements Observer<T>, Lifecyc
      */
     protected SimpleLifeCycleCallback(Lifecycle lifecycle) {
         lifecycle.addObserver(this);
+    }
+
+    protected Disposable getDisposable() {
+        return disposable;
     }
 
     @Override
@@ -53,17 +60,18 @@ public abstract class SimpleLifeCycleCallback<T> implements Observer<T>, Lifecyc
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private void onDestroy() {
-//        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+        LogUtils.e("BaseLifecycleCallback###onDestroy");
     }
 
 
     /*******************对外方法**********************/
     public abstract void onSuccess(T t);
 
-    public abstract void onFailed(int code, String message);
+    public void onFailed(int code, String message) {
+        ToastUtils.showShort(message);
+    }
 
     public void onFinish() {
-//        onDestroy();
     }
 
 }

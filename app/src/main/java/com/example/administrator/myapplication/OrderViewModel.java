@@ -56,7 +56,7 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
         return happiness;
     }
 
-    public LiveData<Happiness> getHappiness(int page, Lifecycle lifecycle) {
+    public LiveData<Happiness> getHappinessLifecycle() {
         if (happiness == null) {
             happiness = new MutableLiveData<>();
         }
@@ -128,6 +128,10 @@ public class OrderViewModel extends ViewModel implements OrderFragment.OrderList
 
             @Override
             public void onFailed(int code, String message) {
+                super.onFailed(code, message);
+                if (happiness != null) {
+                    happiness.postValue(null);
+                }
             }
 
             @Override

@@ -14,8 +14,6 @@ import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.adapter.InfoAdapter_kt
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.bean.Happiness
-import com.example.administrator.myapplication.net.HttpRequest
-import com.example.administrator.myapplication.net.core.callback.SimpleLifeCycleCallback
 import kotlinx.android.synthetic.main.activity_system_info.*
 
 class SystemInfoActivity : BaseActivity() {
@@ -63,13 +61,12 @@ class SystemInfoActivity : BaseActivity() {
     }
 
     private fun observeData() {
-        orderViewModel.getHappiness(page, lifecycle).observe(this, Observer { happiness ->
+        orderViewModel.getHappiness().observe(this, Observer { happiness ->
             refresh.finishLoadMore()
             refresh.finishRefresh()
 
-            LogUtils.e("page=$page happiness=${happiness.results.size}")
-
             if (happiness != null) {
+                LogUtils.e("page=$page happiness=${happiness.results.size}")
                 if (page == 1) {
                     list.clear()
                 }
@@ -81,23 +78,7 @@ class SystemInfoActivity : BaseActivity() {
     }
 
     private fun getList(page: Int) {
-//        orderViewModel.getHappinessWeb(page, lifecycle)
-        HttpRequest.getHappiness(page, object : SimpleLifeCycleCallback<String>(lifecycle) {
-            override fun onSuccess(s: String) {
-                refresh.finishLoadMore()
-                refresh.finishRefresh()
-                tvTitle.text = s;
-            }
-
-            override fun onFailed(code: Int, message: String) {
-                refresh.finishLoadMore()
-                refresh.finishRefresh()
-            }
-
-            override fun onFinish() {
-                super.onFinish()
-            }
-        })
+        orderViewModel.getHappinessWeb(page, lifecycle)
     }
 
 }
