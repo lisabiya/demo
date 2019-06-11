@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -70,7 +71,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        isAttach = true;
+        isAttach = false;
         super.onDetach();
     }
 }

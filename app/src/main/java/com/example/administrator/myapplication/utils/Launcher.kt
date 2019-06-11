@@ -9,5 +9,15 @@ fun main() {
     fun start(): String {
         return add("ss")
     }
-    print(start())
+    println(start())
+    val s = method("aa") {
+        val la = it.length;
+        "${la}第一行代码"
+    }
+    print(s)
+}
+
+
+fun <T> method(args: String, body: (a: String) -> T): T {
+    return body(args)
 }
