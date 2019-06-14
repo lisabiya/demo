@@ -30,12 +30,13 @@ class EmptyFragment : BaseFragment() {
     var currentFrame = 0;
 
     override fun initView() {
+        initLottie()
         btGetOrder.setOnClickListener {
             //            initDialog()
             lottie.playAnimation()
         }
         bt1.setOnClickListener {
-            lottie.setAnimation("test.json");
+            lottie.setAnimation("data15.json");
         }
         bt2.setOnClickListener {
             lottie.setAnimation("high_five.json");
@@ -46,6 +47,10 @@ class EmptyFragment : BaseFragment() {
         btNext.setOnClickListener {
             lottie.frame = currentFrame++;
         }
+    }
+
+    private fun initLottie() {
+        lottie.imageAssetsFolder = "images"
     }
 
     override fun initData() {

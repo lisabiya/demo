@@ -67,7 +67,7 @@ public class HttpRequest {
      */
     public static void getHappiness(SimpleCallback<String> subscriber) {
         Observable<String> observable = getApiService(ApiService.class).getInfo(String.format(Locale.CHINA,
-                "http://gank.io/api/data/%%E7%%A6%%8F%%E5%%88%%A9/%d/%d", 200, 1));
+                "http://gank.io/api/data/%%E7%%A6%%8F%%E5%%88%%A9/%d/%d", 20, 1));
         ObservableDecorator.decorateEntity(observable, String.class).subscribe(subscriber);
     }
 
