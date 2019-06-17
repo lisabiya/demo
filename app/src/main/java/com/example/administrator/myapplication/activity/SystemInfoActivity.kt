@@ -73,7 +73,8 @@ class SystemInfoActivity : BaseActivity() {
                 list.addAll(happiness.results)
                 adapter.notifyDataSetChanged()
             }
-
+//            adapter.removeAllFooterView()
+//            adapter.addFooterView(ivBack)
         })
     }
 

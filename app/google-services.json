@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "259519243275",
+    "firebase_url": "https://a-debby-1.firebaseio.com",
+    "project_id": "a-debby-1",
+    "storage_bucket": "a-debby-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259519243275:android:c29ba4c3c47176e8",
+        "android_client_info": {
+          "package_name": "com.example.administrator.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259519243275-rlgj3vtu12q1a4ogctlaaaq43np13heo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKCF8hd4RkWQ7-n8Ex7aSXMgvxaGXqyFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259519243275-rlgj3vtu12q1a4ogctlaaaq43np13heo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

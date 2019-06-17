@@ -34,7 +34,7 @@ class UserCenterFragment : BaseFragment() {
 
         fun myPurse(activity: Activity?)
 
-        fun set()
+        fun set(activity: Activity?)
 
         fun record()
 
@@ -76,7 +76,7 @@ class UserCenterFragment : BaseFragment() {
 //            userCenterListener.myPurse(activity)
         }
         rlSetting.setOnClickListener {
-            userCenterListener.set()
+            userCenterListener.set(activity)
         }
         rlRecord.setOnClickListener {
             userCenterListener.record()

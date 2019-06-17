@@ -47,13 +47,17 @@
 
 
         <!--Activity-->
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".activity.SystemInfoActivity"
@@ -63,6 +67,7 @@
             android:launchMode="singleTask" />
 
         <activity android:name=".activity.MyPurseActivity" />
+        <activity android:name=".activity.MLActivity" />
         <activity
             android:name=".activity.PhotoViewActivity"
             android:launchMode="singleTop" />

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.administrator.myapplication.activity.MLActivity;
 import com.example.administrator.myapplication.activity.MyPurseActivity;
 import com.example.administrator.myapplication.activity.SystemInfoActivity;
 import com.example.administrator.myapplication.bean.User;
@@ -91,9 +92,9 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     }
 
     @Override
-    public void set() {
+    public void set(Activity activity) {
         loadUsers(new User("set"));
-        RouteQueryUtil.rxJavaBuffer();
+        activity.startActivity(new Intent(activity, MLActivity.class));
     }
 
     @Override
