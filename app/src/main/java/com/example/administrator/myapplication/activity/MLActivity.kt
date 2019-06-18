@@ -8,13 +8,13 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
 import com.bumptech.glide.Glide
+import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.utils.GlideEngine
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
@@ -31,9 +31,9 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  */
 class MLActivity : AppCompatActivity() {
 
-    lateinit var image: ImageView
-    lateinit var text: Button
-    lateinit var tvResult: TextView
+    private lateinit var image: ImageView
+    private lateinit var text: Button
+    private lateinit var tvResult: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class MLActivity : AppCompatActivity() {
             //选择图片
             text = button("选择图片(目前只支持英文)") {
                 id = com.example.administrator.myapplication.R.id.text
-                textColor = resources.getColor(com.example.administrator.myapplication.R.color.colorPrimary)
+                textColor = ContextCompat.getColor(this@MLActivity, R.color.colorPrimary)
                 gravity = Gravity.CENTER
 
                 onClick {
@@ -61,9 +61,9 @@ class MLActivity : AppCompatActivity() {
             scrollView {
                 linearLayout {
                     textView("结果") {
-                        textColor = resources.getColor(com.example.administrator.myapplication.R.color.colorPrimary)
+                        textColor = ContextCompat.getColor(this@MLActivity, R.color.colorPrimary)
                         textSize = 30f
-                        tvResult = this;
+                        tvResult = this
                     }
                 }
             }.lparams {
@@ -84,7 +84,7 @@ class MLActivity : AppCompatActivity() {
                                 .countable(true)
                                 .maxSelectable(1)
                                 .imageEngine(GlideEngine())
-                                .forResult(10086);
+                                .forResult(10086)
                     }
 
                     override fun onDenied() {
@@ -107,10 +107,9 @@ class MLActivity : AppCompatActivity() {
     private fun ml(uri: Uri) {
         val image = FirebaseVisionImage.fromFilePath(this, uri)
         val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
-        val result = detector.processImage(image)
+        detector.processImage(image)
                 .addOnSuccessListener { findText ->
                     val build = StringBuilder()
-                    val resultText = findText.text
                     for (block in findText.textBlocks) {
                         for (line in block.lines) {
                             for (element in line.elements) {
@@ -136,11 +135,6 @@ class MLActivity : AppCompatActivity() {
                     }
                     tvResult.text = languageCode
                 }
-                .addOnFailureListener(object : OnFailureListener {
-                    override fun onFailure(@NonNull e: Exception) {
-                        tvResult.text = e.message
-                    }
-                })
-
+                .addOnFailureListener { e -> tvResult.text = e.message }
     }
 }

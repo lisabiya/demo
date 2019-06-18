@@ -8,6 +8,7 @@ import android.transition.Slide
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.FragmentUtils
 import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
@@ -29,7 +30,7 @@ class MainActivity : BaseActivity() {
     private val userCenterFragment = UserCenterFragment()
     private val orderFragment = OrderFragment()
     private val emptyFragment = EmptyFragment()
-    private var key = 0;
+    private var key = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ class MainActivity : BaseActivity() {
 
     private fun initView() {
         llOrder.setOnClickListener {
-            key++;
+            key++
             if (emptyFragment.isVisible) {
                 return@setOnClickListener
             }
@@ -51,12 +52,12 @@ class MainActivity : BaseActivity() {
         }
         llOrder.setOnLongClickListener {
             if (key == 6) {
-                key = 0;
+                key = 0
                 startActivity(Intent(this, SystemInfoActivity::class.java))
                 return@setOnLongClickListener true
             }
             if (key != 5) {
-                key = 0;
+                key = 0
                 return@setOnLongClickListener true
             }
             if (orderFragment.isVisible) {
@@ -68,7 +69,7 @@ class MainActivity : BaseActivity() {
         }
 
         llUserCenter.setOnClickListener {
-            key = 0;
+            key = 0
             if (userCenterFragment.isVisible) {
                 return@setOnClickListener
             }
@@ -99,36 +100,36 @@ class MainActivity : BaseActivity() {
     //选择空
     private fun selectEmpty() {
         ivOrder.setImageResource(R.mipmap.ic_home)
-        tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
+        tvOrder.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             emptyFragment.enterTransition = Slide(Gravity.START)
-        };
+        }
         FragmentUtils.show(emptyFragment)
     }
 
     //选择订单
     private fun selectOrder() {
         ivOrder.setImageResource(R.mipmap.ic_home)
-        tvOrder.setTextColor(resources.getColor(R.color.colorPrimary))
+        tvOrder.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
         FragmentUtils.show(orderFragment)
     }
 
     //选择个人中心
     private fun selectUserCenter() {
         ivUserCenter.setImageResource(R.mipmap.ic_user)
-        tvUserCenter.setTextColor(resources.getColor(R.color.colorPrimary))
+        tvUserCenter.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             userCenterFragment.enterTransition = Explode()
-        };
+        }
         FragmentUtils.show(userCenterFragment)
     }
 
     //重置选择
     private fun resetSelect() {
         ivOrder.setImageResource(R.mipmap.ic_home)
-        tvOrder.setTextColor(resources.getColor(R.color.txt_gray))
+        tvOrder.setTextColor(ContextCompat.getColor(this, R.color.txt_gray))
         ivUserCenter.setImageResource(R.mipmap.ic_user)
-        tvUserCenter.setTextColor(resources.getColor(R.color.txt_gray))
+        tvUserCenter.setTextColor(ContextCompat.getColor(this, R.color.txt_gray))
 
         FragmentUtils.hide(emptyFragment)
         FragmentUtils.hide(orderFragment)
@@ -138,13 +139,13 @@ class MainActivity : BaseActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            val home = Intent(Intent.ACTION_MAIN);
-            home.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
-            home.addCategory(Intent.CATEGORY_HOME);
-            startActivity(home);
-            return true;
+            val home = Intent(Intent.ACTION_MAIN)
+            home.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            home.addCategory(Intent.CATEGORY_HOME)
+            startActivity(home)
+            return true
         }
-        return super.onKeyDown(keyCode, event);
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {

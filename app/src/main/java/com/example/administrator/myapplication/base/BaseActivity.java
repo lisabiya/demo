@@ -3,12 +3,13 @@ package com.example.administrator.myapplication.base;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.example.administrator.myapplication.activity.ViewInterface;
 import com.gyf.barlibrary.ImmersionBar;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.disposables.Disposable;
 
 public abstract class BaseActivity extends AppCompatActivity implements ViewInterface {
@@ -20,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewInte
 //            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
 //        }
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this).transparentStatusBar().statusBarDarkFont(false);
+        ImmersionBar.with(this).transparentStatusBar().fitsSystemWindows(true).statusBarDarkFont(false).init();
         AdaptScreenUtils.adaptWidth(getResources(), 400);
     }
 
