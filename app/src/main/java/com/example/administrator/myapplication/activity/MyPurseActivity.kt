@@ -20,7 +20,7 @@ class MyPurseActivity : BaseActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ImmersionBar.with(this).statusBarDarkFont(true).init()
+        ImmersionBar.with(this).fitsSystemWindows(false).statusBarDarkFont(true).init()
         setContentView(R.layout.activity_my_purse)
         initTransaction()
         initView()

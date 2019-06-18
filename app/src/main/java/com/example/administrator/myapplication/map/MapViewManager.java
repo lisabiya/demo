@@ -1,6 +1,10 @@
 package com.example.administrator.myapplication.map;
 
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -11,12 +15,11 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.example.administrator.myapplication.activity.MapActivityIml;
 import com.example.administrator.myapplication.base.BaseApplication;
-
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 
 public class MapViewManager implements LifecycleObserver, AMapLocationListener, MapActivityIml {
     private MapView mMapView;
@@ -27,7 +30,7 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
     public MapViewManager(MapView mMapView) {
         this.mMapView = mMapView;
         MapInitKt.initMap(mMapView.getMap());
-        initLocation();
+        requestLocation();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -60,6 +63,21 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
 
 
     /******************定位*******************/
+    private void requestLocation() {
+        PermissionUtils.permission(PermissionConstants.STORAGE)
+                .callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        initLocation();
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.showShort("定位失败");
+                    }
+                }).request();
+    }
+
     private void initLocation() {
         //初始化定位
         locationClient = new AMapLocationClient(BaseApplication.getInstance());

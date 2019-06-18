@@ -2,6 +2,7 @@ package com.example.administrator.myapplication.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -37,9 +38,10 @@ class MLActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ImmersionBar.with(this).statusBarDarkFont(true).init()
+        ImmersionBar.with(this).fitsSystemWindows(false).statusBarDarkFont(true).init()
 
         relativeLayout {
+            backgroundColor = Color.WHITE
             //选择图片
             text = button("选择图片(目前只支持英文)") {
                 id = com.example.administrator.myapplication.R.id.text

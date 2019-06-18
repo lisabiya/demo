@@ -7,6 +7,7 @@ import com.example.administrator.myapplication.R
 import com.example.administrator.myapplication.base.BaseActivity
 import com.example.administrator.myapplication.map.MapViewManager
 import kotlinx.android.synthetic.main.activity_my_order.*
+import kotlin.random.Random
 
 class MyOrderActivity : BaseActivity() {
 
@@ -23,6 +24,11 @@ class MyOrderActivity : BaseActivity() {
     private fun initView() {
         ivBack.setOnClickListener {
             onBackPressed()
+        }
+        ivChange.setOnClickListener {
+            val type = Random(5).nextInt()
+            if (type == 0) return@setOnClickListener
+            aMap.map.mapType = type
         }
     }
 
