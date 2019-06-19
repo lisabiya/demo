@@ -26,7 +26,7 @@ class MyOrderActivity : BaseActivity() {
             onBackPressed()
         }
         ivChange.setOnClickListener {
-            val type = Random(5).nextInt()
+            val type = Random.nextInt(5)
             if (type == 0) return@setOnClickListener
             aMap.map.mapType = type
         }

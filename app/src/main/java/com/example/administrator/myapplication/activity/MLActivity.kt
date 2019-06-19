@@ -38,7 +38,7 @@ class MLActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ImmersionBar.with(this).fitsSystemWindows(false).statusBarDarkFont(true).init()
+        ImmersionBar.with(this).statusBarDarkFont(true).init()
 
         relativeLayout {
             backgroundColor = Color.WHITE

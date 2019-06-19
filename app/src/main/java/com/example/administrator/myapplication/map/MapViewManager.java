@@ -64,7 +64,7 @@ public class MapViewManager implements LifecycleObserver, AMapLocationListener, 
 
     /******************定位*******************/
     private void requestLocation() {
-        PermissionUtils.permission(PermissionConstants.STORAGE)
+        PermissionUtils.permission(PermissionConstants.LOCATION)
                 .callback(new PermissionUtils.SimpleCallback() {
                     @Override
                     public void onGranted() {

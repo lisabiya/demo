@@ -45,7 +45,13 @@ class EmptyFragment : BaseFragment() {
             lottie.setAnimation("page.json");
         }
         btNext.setOnClickListener {
-            lottie.frame = currentFrame++;
+            if (lottie.maxFrame <= currentFrame) {
+                currentFrame = 0
+            }
+            lottie.frame = currentFrame++
+        }
+        ivChange.setOnClickListener {
+            initDialog()
         }
     }
 
@@ -64,17 +70,17 @@ class EmptyFragment : BaseFragment() {
     }
 
     private fun initDialog() {
-        val bottomSheetDialog = BottomSheetDialog(activity!!);
+        val bottomSheetDialog = BottomSheetDialog(activity!!)
         val dialogView = bottomSheetDialog.layoutInflater.inflate(R.layout.dialog_bottom, null)
         dialogView.findViewById<Button>(R.id.btOk).setOnClickListener {
             bottomSheetDialog.dismiss()
         }
         dialogView.findViewById<SimpleDraweeView>(R.id.roundView).setActualImageResource(R.mipmap.forgotme)
-        bottomSheetDialog.setContentView(dialogView);
-        (dialogView.parent as View).setBackgroundColor(Color.TRANSPARENT);
+        bottomSheetDialog.setContentView(dialogView)
+        (dialogView.parent as View).setBackgroundColor(Color.TRANSPARENT)
         //给布局设置透明背景色
-        bottomSheetDialog.show();
-        AnimationUtil.doAnimation(dialogView, AnimationUtil.AnimationType.ROTATION);
+        bottomSheetDialog.show()
+        AnimationUtil.doAnimation(dialogView, AnimationUtil.AnimationType.ROTATION)
     }
 
 }

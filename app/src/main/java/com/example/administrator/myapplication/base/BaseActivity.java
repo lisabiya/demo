@@ -5,8 +5,10 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.AdaptScreenUtils;
+import com.example.administrator.myapplication.R;
 import com.example.administrator.myapplication.activity.ViewInterface;
 import com.gyf.barlibrary.ImmersionBar;
 
@@ -17,11 +19,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewInte
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
-//        }
+        this.getWindow().getDecorView().setBackground(ContextCompat.getDrawable(this, R.drawable.border_shadow));
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this).transparentStatusBar().fitsSystemWindows(true).statusBarDarkFont(false).init();
+        ImmersionBar.with(this).transparentStatusBar().fitsSystemWindows(false).statusBarDarkFont(false).init();
         AdaptScreenUtils.adaptWidth(getResources(), 400);
     }
 
