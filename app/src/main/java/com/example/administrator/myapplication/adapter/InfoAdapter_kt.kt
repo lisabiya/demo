@@ -23,7 +23,8 @@ class InfoAdapter_kt(data: List<Happiness.ResultsBean>)
                 setControllerListener(simpleDraweeView!!, item.url)
             }
         }
-        item.let {
+        item.run {
+
         }
     }
 

@@ -30,7 +30,7 @@ class UserCenterFragment : BaseFragment() {
 
         fun verified()
 
-        fun myOrder()
+        fun myOrder(activity: Activity?)
 
         fun myPurse(activity: Activity?)
 
@@ -66,7 +66,7 @@ class UserCenterFragment : BaseFragment() {
             userCenterListener.verified()
         }
         rlMyOrder.setOnClickListener {
-            userCenterListener.myOrder()
+            userCenterListener.myOrder(activity)
         }
         rlMyPurse.setOnClickListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

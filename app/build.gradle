@@ -28,7 +28,9 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -40,6 +42,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.firebase:firebase-ml-vision:20.0.0'
     implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:19.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
@@ -60,9 +63,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     //fresco
     implementation 'com.facebook.fresco:fresco:1.9.0'
-    //navigation
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
-    implementation files('libs/com.coloros.mcssdk.jar')
     //BaseAdapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation files('libs/AMap3DMap_6.7.0_AMapSearch_6.5.0_AMapLocation_4.4.0_20190213.jar')
@@ -77,4 +77,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
     implementation 'com.zhihu.android:matisse:0.5.1'
+    //
+    implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
 }

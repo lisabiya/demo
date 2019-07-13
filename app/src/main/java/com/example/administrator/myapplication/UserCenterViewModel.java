@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.administrator.myapplication.activity.MLActivity;
+import com.example.administrator.myapplication.activity.MyOrderActivity;
 import com.example.administrator.myapplication.activity.MyPurseActivity;
 import com.example.administrator.myapplication.activity.SystemInfoActivity;
 import com.example.administrator.myapplication.bean.User;
@@ -78,8 +79,9 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     }
 
     @Override
-    public void myOrder() {
+    public void myOrder(Activity activity) {
         loadUsers(new User("myOrder"));
+        activity.startActivity(new Intent(activity, MyOrderActivity.class));
     }
 
     @Override

@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
 
         btGetOrder.setOnClickListener {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(Intent(this, MyOrderActivity::class.java))
+                startActivity(Intent(this, MapActivity::class.java))
             }
         }
 

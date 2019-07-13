@@ -59,8 +59,15 @@
             android:name=".activity.SystemInfoActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".activity.MyOrderActivity"
+            android:name=".activity.MapActivity"
             android:launchMode="singleTask" />
+
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.MyRecordActivity"
+            android:launchMode="singleTop" />
 
         <activity android:name=".activity.MyPurseActivity" />
         <activity android:name=".activity.MLActivity" />
