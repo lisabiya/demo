@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.administrator.myapplication.activity.MLActivity;
 import com.example.administrator.myapplication.activity.MyOrderActivity;
 import com.example.administrator.myapplication.activity.MyPurseActivity;
+import com.example.administrator.myapplication.activity.MyVerifiedActivity;
 import com.example.administrator.myapplication.activity.SystemInfoActivity;
 import com.example.administrator.myapplication.bean.User;
 import com.example.administrator.myapplication.fragment.UserCenterFragment;
@@ -67,7 +68,7 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
     }
 
     @Override
-    public void verified() {
+    public void verified(Activity activity) {
         Disposable disposable = Observable.just("delay")
                 .delay(2, TimeUnit.SECONDS)
                 .subscribe(new Consumer<String>() {
@@ -76,6 +77,7 @@ public class UserCenterViewModel extends ViewModel implements UserCenterFragment
                         loadUsers(new User(s));
                     }
                 });
+        activity.startActivity(new Intent(activity, MyVerifiedActivity.class));
     }
 
     @Override

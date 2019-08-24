@@ -31,4 +31,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="article">计算校验和时，需要在UDP之前增加12个字节的伪首部。这种首部并不是用户数据报的真正首部。伪首部并不在网络中传输，只是在计算检验和，临时添加在UDP用户数据报前，得到一个临时的用户数据报。
+UDP的校验和是把首部和数据部分一起校验，发送方计算校验和的一般步骤：
+
+将首部的校验和字段填充为0（零）
+把伪首部和用户数据报UDP看出16位的字符串连接起来
+如果数据部分不是偶数字节，则填充一个全零字节（该字节不发送到网络层）
+按二进制反马计算出这些16位字的和
+然后将和写入校验和字段，就可以发送到网络层了。
+
+接收方收到用户数据报后，连同伪首部一起，按二进制反码求这些16位字的和，无差错结果是应全为1.否则出错，直接丢弃该报文。
+</string>
+    <string name="top_pin_bar">置顶栏目</string>
+
 </resources>

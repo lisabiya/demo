@@ -28,7 +28,7 @@ class UserCenterFragment : BaseFragment() {
         //View操作监听
         fun sysTem(fragmentManager: FragmentManager?)
 
-        fun verified()
+        fun verified(activity: Activity?)
 
         fun myOrder(activity: Activity?)
 
@@ -63,7 +63,7 @@ class UserCenterFragment : BaseFragment() {
             userCenterListener.sysTem(fragmentManager)
         }
         rlVerified.setOnClickListener {
-            userCenterListener.verified()
+            userCenterListener.verified(activity)
         }
         rlMyOrder.setOnClickListener {
             userCenterListener.myOrder(activity)

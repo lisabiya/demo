@@ -1,1 +1,6 @@
-include ':app', ':lib'
+include ':app'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+  settingsDir.parentFile,
+  '..\\flutterdev\\flutter_order\\.android\\include_flutter.groovy'
+))

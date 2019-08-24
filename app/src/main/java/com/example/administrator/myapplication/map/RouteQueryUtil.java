@@ -135,7 +135,8 @@ public class RouteQueryUtil {
 
 
     public static void rxJava3() {
-        Observable.zip(makeRequest("aaaaa"), makeRequest("aaaaa"), makeRequest("aaaaa"), makeRequest("aaaaa"), new Function4<Integer, Integer, Integer, Integer, Integer>() {
+        Observable.zip(makeRequest("aaaaa"), makeRequest("aaaaa"), makeRequest("aaaaa"),
+                makeRequest("aaaaa"), new Function4<Integer, Integer, Integer, Integer, Integer>() {
             @Override
             public Integer apply(Integer integer, Integer integer2, Integer integer3, Integer integer4) throws Exception {
                 return integer + integer2 + integer3 + integer4;
